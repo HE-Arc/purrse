@@ -23,8 +23,11 @@
                 </p>
             </div>
         </main>
-        <footer class='bg-gray-800 py-20'>
-            <p class='px-48'>
+        <div class='curve'>
+            <!--Use for setup the curves-->
+        </div>
+        <footer class='bg-gray-800 py-56'>
+            <p class='px-80'>
             He-arc Neuchâtel
             </p>
         </footer>
@@ -33,7 +36,40 @@
 </template>
 
 <style scoped>
+/**
+    .curve
+    Source : https://fireship.io/lessons/wavy-backgrounds/
+ */
+.curve{
+    padding: 0% !important;
+    position: absolute;
+    height: 225px;
+    width: 100%;
+    bottom: 0;
+}
 
+.curve::before{
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 45%;
+    width: 60%;
+    height: 100%;
+    background-color: #1f2937;
+    transform: translate(79%, -139%);
+}
+
+.curve::after{
+    content: '';
+    display: block;
+    position: absolute;
+    border-radius: 100% 45%;
+    width: 60%;
+    height: 100%;
+    background-color: #374151;
+    transform: translate(-4%, -164%);
+    z-index: 1;
+}
 </style>
 
 <script>
@@ -44,5 +80,8 @@ export default {
       Head,
       Link,
     },
+    beforeCreate: function() {
+        document.body.className = 'overflow-x-hidden';
+    }
 }
 </script>
