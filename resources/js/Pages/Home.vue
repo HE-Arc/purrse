@@ -2,12 +2,12 @@
     <Head title='Home' />
     <div class='flex flex-col justify-between h-screen pt-10 bg-gray-700 text-gray-50'>
         <main class='content px-48'>
-            <div class='flex justify-end'>
-                <Link :href="route('login')" class="text-sm underline">
+            <div class='flex justify-end text-yellow-200'>
+                <Link :href="route('login')" class="text-2xl underline">
                     Log in
                 </Link>
 
-                <Link :href="route('register')" class="ml-4 text-sm underline">
+                <Link :href="route('register')" class="ml-4 text-2xl underline">
                     Register
                 </Link>
             </div>
@@ -15,20 +15,23 @@
                 <h1 class='text-6xl font-normal leading-normal '>
                     Purrse
                 </h1>
-                <p class='mt-20'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quam turpis, ullamcorper sit amet odio sit amet,
-                    ltrices dictum elit. Nunc at enim a elit bibendum rhoncus eget sit amet risus. Suspendisse at ipsum sit amet ligula ullamcorper accumsan. Suspendisse gravida massa mi, et efficitur est ullamcorper porttitor. Fusce nulla metus, ultrices at condimentum a,
-                    molestie mattis lacus. Quisque tincidunt ante non nisi pellentesque,
-                    et scelerisque augue iaculis. Cras mi neque, condimentum eget dictum eget, rhoncus vitae dolor. Nam eu ante euismod nisi aliquam malesuada. Morbi mollis quis augue sit amet fringilla.
+                <h3 class='text-4xl font-normal leading-normal mt-10'>
+                    Phrase bateau avec Purrse et chat I guess
+                </h3>
+                <p class='mt-20 text-2xl'>
+                   L'application Purrse vous permet de gérer vos dépenses avec vos amis, collègues, collocataires...
                 </p>
             </div>
         </main>
-        <div class='curve'>
-            <!--Use for setup the curves-->
-        </div>
-        <footer class='bg-gray-800 py-56'>
+        <footer class='bg-gray-800 py-56 relative'>
+            <div class="wave">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+                </svg>
+            </div>
+
             <p class='px-80'>
-            He-arc Neuchâtel
+            © He-arc Neuchâtel 2021
             </p>
         </footer>
     </diV>
@@ -36,39 +39,26 @@
 </template>
 
 <style scoped>
-/**
-    .curve
-    Source : https://fireship.io/lessons/wavy-backgrounds/
- */
-.curve{
-    padding: 0% !important;
+.wave {
     position: absolute;
-    height: 225px;
+    top: 0;
+    left: 0;
     width: 100%;
-    bottom: 0;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
 }
 
-.curve::before{
-    content: '';
+.wave svg {
+    position: relative;
     display: block;
-    position: absolute;
-    border-radius: 100% 45%;
-    width: 60%;
-    height: 100%;
-    background-color: #1f2937;
-    transform: translate(79%, -139%);
+    width: calc(100% + 1.3px);
+    height: 144px;
+    transform: rotateY(180deg);
 }
 
-.curve::after{
-    content: '';
-    display: block;
-    position: absolute;
-    border-radius: 100% 45%;
-    width: 60%;
-    height: 100%;
-    background-color: #374151;
-    transform: translate(-4%, -164%);
-    z-index: 1;
+.wave .shape-fill {
+    fill: #374151;
 }
 </style>
 
