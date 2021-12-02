@@ -21319,7 +21319,7 @@ var _hoisted_1 = {
   "class": "flex flex-col justify-between h-screen pt-10 bg-gray-700 text-gray-50"
 };
 var _hoisted_2 = {
-  "class": "content px-48"
+  "class": "px-10 md:px-20 lg:px-30 xl:px-40"
 };
 var _hoisted_3 = {
   "class": "flex justify-end text-yellow-200"
@@ -21343,7 +21343,23 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<footer class=\"bg-gray-800 py-56 relative\" data-v-6a63e488><div class=\"wave\" data-v-6a63e488><svg data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 120\" preserveAspectRatio=\"none\" data-v-6a63e488><path d=\"M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z\" class=\"shape-fill\" data-v-6a63e488></path></svg></div><p class=\"px-80\" data-v-6a63e488> © He-arc Neuchâtel 2021 </p></footer>", 1);
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", {
+    "class": "bg-gray-800 px-10 md:px-20 lg:px-30 xl:px-40 py-56 relative"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "wave"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+    "data-name": "Layer 1",
+    xmlns: "http://www.w3.org/2000/svg",
+    viewBox: "0 0 1200 120",
+    preserveAspectRatio: "none"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+    d: "M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z",
+    "class": "shape-fill"
+  })])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, " © He-arc Neuchâtel 2021 ")], -1
+  /* HOISTED */
+  );
+});
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
