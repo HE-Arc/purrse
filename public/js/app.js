@@ -21322,7 +21322,7 @@ var _hoisted_2 = {
   "class": "content px-48"
 };
 var _hoisted_3 = {
-  "class": "flex justify-end"
+  "class": "flex justify-end text-yellow-200"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Log in ");
@@ -21334,30 +21334,16 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
     "class": "h-full mt-36"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     "class": "text-6xl font-normal leading-normal"
-  }, " Purrse "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "mt-20"
-  }, " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quam turpis, ullamcorper sit amet odio sit amet, ltrices dictum elit. Nunc at enim a elit bibendum rhoncus eget sit amet risus. Suspendisse at ipsum sit amet ligula ullamcorper accumsan. Suspendisse gravida massa mi, et efficitur est ullamcorper porttitor. Fusce nulla metus, ultrices at condimentum a, molestie mattis lacus. Quisque tincidunt ante non nisi pellentesque, et scelerisque augue iaculis. Cras mi neque, condimentum eget dictum eget, rhoncus vitae dolor. Nam eu ante euismod nisi aliquam malesuada. Morbi mollis quis augue sit amet fringilla. ")], -1
+  }, " Purrse "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+    "class": "text-4xl font-normal leading-normal mt-10"
+  }, " Phrase bateau avec Purrse et chat I guess "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "mt-20 text-2xl"
+  }, " L'application Purrse vous permet de gérer vos dépenses avec vos amis, collègues, collocataires... ")], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "curve"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("Use for setup the curves")], -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", {
-    "class": "bg-gray-800 py-56"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-    "class": "px-80"
-  }, " He-arc Neuchâtel ")], -1
-  /* HOISTED */
-  );
-});
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<footer class=\"bg-gray-800 py-56 relative\" data-v-6a63e488><div class=\"wave\" data-v-6a63e488><svg data-name=\"Layer 1\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 120\" preserveAspectRatio=\"none\" data-v-6a63e488><path d=\"M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z\" class=\"shape-fill\" data-v-6a63e488></path></svg></div><p class=\"px-80\" data-v-6a63e488> © He-arc Neuchâtel 2021 </p></footer>", 1);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
@@ -21368,7 +21354,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Home"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("main", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('login'),
-    "class": "text-sm underline"
+    "class": "text-2xl underline"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_4];
@@ -21380,7 +21366,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["href"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Link, {
     href: _ctx.route('register'),
-    "class": "ml-4 text-sm underline"
+    "class": "ml-4 text-2xl underline"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_5];
@@ -21390,7 +21376,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])]), _hoisted_6]), _hoisted_7, _hoisted_8])], 64
+  , ["href"])]), _hoisted_6]), _hoisted_7])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -21682,7 +21668,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/**\n    .curve\n    Source : https://fireship.io/lessons/wavy-backgrounds/\n */\n.curve[data-v-6a63e488]{\n    padding: 0% !important;\n    position: absolute;\n    height: 225px;\n    width: 100%;\n    bottom: 0;\n}\n.curve[data-v-6a63e488]::before{\n    content: '';\n    display: block;\n    position: absolute;\n    border-radius: 100% 45%;\n    width: 60%;\n    height: 100%;\n    background-color: #1f2937;\n    transform: translate(79%, -139%);\n}\n.curve[data-v-6a63e488]::after{\n    content: '';\n    display: block;\n    position: absolute;\n    border-radius: 100% 45%;\n    width: 60%;\n    height: 100%;\n    background-color: #374151;\n    transform: translate(-4%, -164%);\n    z-index: 1;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.wave[data-v-6a63e488] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    overflow: hidden;\n    line-height: 0;\n    transform: rotate(180deg);\n}\n.wave svg[data-v-6a63e488] {\n    position: relative;\n    display: block;\n    width: calc(100% + 1.3px);\n    height: 144px;\n    transform: rotateY(180deg);\n}\n.wave .shape-fill[data-v-6a63e488] {\n    fill: #374151;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
