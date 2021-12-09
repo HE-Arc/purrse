@@ -71,7 +71,7 @@ export default {
       Link,
     },
     beforeCreate: function() {
-        document.body.className = 'overflow-x-hidden';
+        document.body.className += ' overflow-x-hidden';
     }
 }
 </script>

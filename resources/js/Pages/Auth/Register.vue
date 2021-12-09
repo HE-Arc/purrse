@@ -3,15 +3,15 @@
 
     <BreezeValidationErrors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <form class="text-white" @submit.prevent="submit">
         <div>
             <BreezeLabel for="username" value="Username" />
-            <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="username" />
+            <BreezeInput id="username" type="text" class="mt-1 block w-full bg-gray-400" v-model="form.username" required autofocus autocomplete="username" />
         </div>
 
         <div class="mt-4">
             <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
+            <BreezeInput id="email" type="email" class="mt-1 block w-full bg-gray-400" v-model="form.email" required autocomplete="username" />
         </div>
 
         <div class="mt-4">
@@ -26,16 +26,16 @@
 
         <div class="mt-4">
             <BreezeLabel for="password" value="Password" />
-            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+            <BreezeInput id="password" type="password" class="mt-1 block w-full bg-gray-400" v-model="form.password" required autocomplete="new-password" />
         </div>
 
         <div class="mt-4">
             <BreezeLabel for="password_confirmation" value="Confirm Password" />
-            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full bg-gray-400" v-model="form.password_confirmation" required autocomplete="new-password" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
+            <Link :href="route('login')" class="underline text-sm text-gray-100 hover:text-gray-300">
                 Already registered?
             </Link>
 
@@ -45,6 +45,12 @@
         </div>
     </form>
 </template>
+
+<style scoped>
+.spanColor{
+    color:wheat !important
+}
+</style>
 
 <script>
 import BreezeButton from '@/Components/Button.vue'
@@ -64,6 +70,10 @@ export default {
         BreezeValidationErrors,
         Head,
         Link,
+    },
+
+    beforeCreate: function() {
+        document.getElementsByTagName('span').className += ' spanColor';
     },
 
     data() {
@@ -86,6 +96,6 @@ export default {
                 onFinish: () => this.form.reset('password', 'password_confirmation'),
             })
         }
-    }
+    },
 }
 </script>

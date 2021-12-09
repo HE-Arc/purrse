@@ -7,15 +7,15 @@
         {{ status }}
     </div>
 
-    <form @submit.prevent="submit">
+    <form class="text-white" @submit.prevent="submit">
         <div>
             <BreezeLabel for="email" value="Email" />
-            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+            <BreezeInput id="email" type="email" class="mt-1 block w-full bg-gray-400" v-model="form.email" required autofocus autocomplete="username" />
         </div>
 
         <div class="mt-4">
             <BreezeLabel for="password" value="Password" />
-            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+            <BreezeInput id="password" type="password" class="mt-1 block w-full bg-gray-400" v-model="form.password" required autocomplete="current-password" />
         </div>
 
         <div class="block mt-4">
