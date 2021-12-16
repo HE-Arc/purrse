@@ -47,9 +47,7 @@
 </template>
 
 <style scoped>
-.spanColor{
-    color:wheat !important
-}
+
 </style>
 
 <script>
