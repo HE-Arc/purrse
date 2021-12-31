@@ -1,10 +1,10 @@
 <template>
-    <div class="min-h-screen">
+    <div>
         <nav>
             <!-- Header menu -->
-            <div class="max-w-7xl mx-auto flex justify-between h-16">
+            <div class="max-w-7xl mx-auto flex justify-between header">
                 <!-- Content title -->
-                <div class="pt-4 text-lg sm:items-center">
+                <div class="pt-4 text-2xl sm:items-center text-yellow-200">
                     Mainboard
                 </div>
 
@@ -15,7 +15,7 @@
                         <BreezeDropdown align="right" width="48">
                             <template #trigger>
                                 <span class="inline-flex rounded-md">
-                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-700 bg-yellow-200 hover:text-gray-900 hover:bg-yellow-300 focus:outline-none transition ease-in-out duration-150">
                                         {{ $page.props.auth.user.name }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -62,7 +62,6 @@ export default {
         BreezeDropdownLink,
         Link,
     },
-
     data() {
         return {
             showingNavigationDropdown: false,
@@ -70,3 +69,8 @@ export default {
     },
 }
 </script>
+<style>
+    .header {
+        min-height : 55px;
+    }
+</style>
