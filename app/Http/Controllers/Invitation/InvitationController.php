@@ -21,7 +21,7 @@ class InvitationController extends Controller
         }
 
         //if token exist
-        return Inertia::render('AcceptInvitation', [
+        return Inertia::render('Application/AcceptInvitation', [
             'listName' => $listName,
             'error' => $error,
         ]);
