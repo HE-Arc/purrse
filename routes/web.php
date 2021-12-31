@@ -2,6 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Invitation\InvitationController;
 use Inertia\Inertia;
 
 /*
@@ -22,5 +23,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/invite/{token}', [InvitationController::class, 'create']);
 
 require __DIR__ . '/auth.php';
