@@ -24,5 +24,10 @@
         "tailwindcss": "^2.1.2",
         "vue": "^3.0.5",
         "vue-loader": "^16.1.2"
+    },
+    "dependencies": {
+        "draggable": "^4.2.0",
+        "vue-feather-icons": "^5.1.0",
+        "vuedraggable": "^4.1.0"
     }
 }
