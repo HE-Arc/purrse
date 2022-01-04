@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Lists;
 
 class ListController extends Controller
 {
@@ -18,7 +19,11 @@ class ListController extends Controller
      */
     public function create(Request $request)
     {
-
+        $list = Lists::all();
+        /*
+        return Inertia::render('Application/Mainboard', [
+            'listName' => $list
+        ]);*/
         /*
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
