@@ -10,7 +10,9 @@
             </object>
         </div>
     </li>
-    <SpaceModal v-if="showModal" @close="closeModal" :user="user"/>
+    <transition name="fade">
+        <SpaceModal v-if="showModal" @close="closeModal" :user="user"/>
+    </transition>
 </template>
 <script>
     import SpaceModal from '@/Components/SpaceModal.vue';
@@ -35,3 +37,12 @@
         }
     }
 </script>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+    }
+</style>
