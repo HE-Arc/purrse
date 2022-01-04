@@ -26,7 +26,7 @@ Route::get('/mainboard', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('Application/Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/invite/{token}', [InvitationController::class, 'create']);

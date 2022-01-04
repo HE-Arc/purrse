@@ -1,8 +1,7 @@
 <template>
-    <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer"
-        @click="onSelect(user)">
+    <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer" @click.stop="openModal">
         {{user.name}}
-        <div id="sortDiv" class="hidden">
+        <div id="sortDiv">
             <object data="../icons/chevron-up-solid.svg" type="image/svg+xml" height="10px" width="10px">
                 <img src="../icons/chevron-up-solid.svg" alt="Sort Up" class="chevron"/>
             </object>
@@ -11,18 +10,39 @@
             </object>
         </div>
     </li>
+    <transition name="fade">
+        <SpaceModal v-if="showModal" @close="closeModal" :user="user"/>
+    </transition>
 </template>
-
 <script>
-    export default {
-        props: ['user'],
-        methods: {
-            onSelect(user) {
-                alert(`Clicking on ${user.name}`);
-            },
-            show() {
+    import SpaceModal from '@/Components/SpaceModal.vue';
 
+    export default {
+        components: {
+            SpaceModal,
+        },
+        props: ['user'],
+        data() {
+            return {
+                showModal: false,
+            };
+        },
+        methods : {
+            openModal() {
+                this.showModal = true;
+            },
+            closeModal() {
+                this.showModal = false;
             }
         }
     }
 </script>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+    }
+</style>
