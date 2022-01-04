@@ -6,14 +6,6 @@
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
             <List :users=users :name="'Collocation'" />
             <List :users=users2 :name="'Appartement'" />
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
             <AddList />
         </div>
     </div>
@@ -53,66 +45,6 @@ export default {
                 {
                     id: 3,
                     name: "Ma Grosse"
-                },
-                {
-                    id: 4,
-                    name: "Queue"
-                },
-                {
-                    id: 5,
-                    name: "Queue"
-                },
-                {
-                    id: 6,
-                    name: "Queue"
-                },
-                {
-                    id: 7,
-                    name: "Queue"
-                },
-                {
-                    id: 8,
-                    name: "Queue"
-                },
-                {
-                    id: 9,
-                    name: "Queue"
-                },
-                {
-                    id: 10,
-                    name: "Queue"
-                },
-                {
-                    id: 11,
-                    name: "Queue"
-                },
-                {
-                    id: 12,
-                    name: "Queue"
-                },
-                {
-                    id: 13,
-                    name: "Queue"
-                },
-                {
-                    id: 14,
-                    name: "Queue"
-                },
-                {
-                    id: 15,
-                    name: "Queue"
-                },
-                {
-                    id: 16,
-                    name: "Queue"
-                },
-                {
-                    id: 17,
-                    name: "Queue"
-                },
-                {
-                    id: 18,
-                    name: "Queue"
                 },
             ]
         }
