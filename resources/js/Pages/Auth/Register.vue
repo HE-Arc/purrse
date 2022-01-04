@@ -3,7 +3,7 @@
 
     <BreezeValidationErrors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <form class="text-white" @submit.prevent="submit">
         <div>
             <BreezeLabel for="username" value="Username" />
             <BreezeInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required autofocus autocomplete="username" />
@@ -31,11 +31,11 @@
 
         <div class="mt-4">
             <BreezeLabel for="password_confirmation" value="Confirm Password" />
-            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full bg-gray-400" v-model="form.password_confirmation" required autocomplete="new-password" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
+            <Link :href="route('login')" class="underline text-sm text-gray-100 hover:text-gray-300">
                 Already registered?
             </Link>
 
@@ -45,6 +45,10 @@
         </div>
     </form>
 </template>
+
+<style scoped>
+
+</style>
 
 <script>
 import BreezeButton from '@/Components/Button.vue'
@@ -86,6 +90,6 @@ export default {
                 onFinish: () => this.form.reset('password', 'password_confirmation'),
             })
         }
-    }
+    },
 }
 </script>
