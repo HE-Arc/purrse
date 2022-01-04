@@ -2,11 +2,8 @@
     <Head title="Mainboard"/>
     <div class="bg-gray-700 min-h-screen h-full">
         <LogoutMenu/>
-
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
-            <AddList />
+            <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name"/>
         </div>
     </div>
 </template>
@@ -25,30 +22,33 @@ export default {
         Head,
         Link,
     },
-    data() {
-        return {
-            users: [
-            {
-                id: 1,
-                name: "Adrian Schubert"
-            },
-            ],
-            users2: [
-                {
-                    id: 1,
-                    name: "Johnny Schubert"
-                },
-                {
-                    id: 2,
-                    name: "Suce"
-                },
-                {
-                    id: 3,
-                    name: "Ma Grosse"
-                },
-            ]
-        }
-    },
+    props: {
+        'lists_arr' : Array
+    }
+    // data() {
+    //     return {
+    //         users: [
+    //         {
+    //             id: 1,
+    //             name: "Adrian Schubert"
+    //         },
+    //         ],
+    //         users2: [
+    //             {
+    //                 id: 1,
+    //                 name: "Johnny Schubert"
+    //             },
+    //             {
+    //                 id: 2,
+    //                 name: "Suce"
+    //             },
+    //             {
+    //                 id: 3,
+    //                 name: "Ma Grosse"
+    //             },
+    //         ]
+    //     }
+    // },
 }
 </script>
 <style>

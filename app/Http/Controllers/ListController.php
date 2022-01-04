@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Lists;
+use App\Models\Space;
+use SebastianBergmann\Environment\Console;
 
 class ListController extends Controller
 {
@@ -19,15 +21,19 @@ class ListController extends Controller
      */
     public function create(Request $request)
     {
-        $list = Lists::all();
-        /*
+        $lists = Lists::all()->toArray();
+        $spaces = Space::all()->toArray();
+        for($i = 0; $i < count($lists); $i++){
+            $lists[$i]['spaces'] = [];
+            for($j = 0; $j < count($spaces); $j++){
+                if($lists[$i]['id'] == $spaces[$j]['list_id']){
+                    array_push($lists[$i]['spaces'],$spaces[$j]);
+                }
+            }
+        }
+        //print_r($lists);
         return Inertia::render('Application/Mainboard', [
-            'listName' => $list
-        ]);*/
-        /*
-        return Inertia::render('Auth/Login', [
-            'canResetPassword' => Route::has('password.request'),
-            'status' => session('status'),
-        ]);*/
+            'lists_arr' => $lists
+        ]);
     }
 }

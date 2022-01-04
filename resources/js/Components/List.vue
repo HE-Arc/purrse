@@ -2,7 +2,7 @@
     <div class="flex items-center justify-center flex-col mr-10 bg-gray-300 rounded-lg">
         <p class="m-5 text-grey-500 font-semibold font-sans tracking-wide"> {{name}} </p>
         <ul class="w-60 max-w-sm h-full overflow-y-auto">
-            <Space v-for="user in users" :key="user.id" :user="user"/>
+            <Space v-for="space in spaces" :key="space.id" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :name="space.name"/>
         </ul>
     </div>
 </template>
@@ -14,8 +14,8 @@
             Space,
         },
         props: {
-            users: Array,
-            name: String,
+            spaces: Array,
+            name: String
         },
     }
 </script>

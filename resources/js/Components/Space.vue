@@ -1,6 +1,6 @@
 <template>
     <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer" @click.stop="openModal">
-        {{user.name}}
+        {{name}}
         <div id="sortDiv">
             <object data="../icons/chevron-up-solid.svg" type="image/svg+xml" height="10px" width="10px">
                 <img src="../icons/chevron-up-solid.svg" alt="Sort Up" class="chevron"/>
@@ -11,7 +11,7 @@
         </div>
     </li>
     <transition name="fade">
-        <SpaceModal v-if="showModal" @close="closeModal" :user="user"/>
+        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay"/>
     </transition>
 </template>
 <script>
@@ -21,7 +21,13 @@
         components: {
             SpaceModal,
         },
-        props: ['user'],
+        props: {
+            name: String,
+            description: String,
+            budget: Number,
+            total: Number,
+            to_pay: Number
+        },
         data() {
             return {
                 showModal: false,
