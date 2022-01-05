@@ -6,15 +6,27 @@
                 <h1 class='text-6xl font-normal leading-normal '>
                     Purrse
                 </h1>
-                <div v-if="!error">
+                <div v-if="!error && !listExist">
                     <p class='mt-20 text-2xl'>
-                        Vous avez été invité à rejoindre la liste {{listName.name}}
+                        Vous avez été invité à rejoindre la liste {{listName}}.
                     </p>
+                    <br><br>
+                    <button @click="accept" class='bg-yellow-200 hover:bg-yellow-400 text-gray-700 font-bold py-2 px-4 border border-black rounded mr-5'>Accepter</button>
+                    <button @click="goBack" class='bg-yellow-400 hover:bg-yellow-500 text-gray-700 font-bold py-2 px-4 border border-black rounded'>Refuser</button>
+                </div>
+                <div v-else-if="listExist">
+                    <p class='mt-20 text-2xl'>
+                        Vous avez déjà la liste {{listName}} dans votre collection de liste !
+                    </p>
+                    <br><br>
+                    <button @click="goBack" class='bg-yellow-200 hover:bg-yellow-400 text-gray-700 font-bold py-2 px-4 border border-black rounded'>Retour</button>
                 </div>
                 <div v-else>
                     <p class='mt-20 text-2xl'>
-                        Ce lien d'invitation ne correspond à aucune liste !
+                        Ce lien d'invitation n'existe pas !
                     </p>
+                    <br><br>
+                    <button @click="goBack" class='bg-yellow-200 hover:bg-yellow-400 text-gray-700 font-bold py-2 px-4 border border-black rounded'>Retour</button>
                 </div>
             </div>
         </main>
@@ -65,8 +77,18 @@ export default {
       Link,
     },
     props: {
-        listName: Object,
-        error: Boolean
+        listName: String,
+        listToken: String,
+        error: Boolean,
+        listExist: Boolean
+    },
+    methods: {
+        accept(){
+            window.location.href='/accept/' + this.listToken;
+        },
+        goBack(){
+            window.location.href='/';
+        }
     }
 }
 </script>

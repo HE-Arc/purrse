@@ -4,6 +4,8 @@
         <LogoutMenu/>
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
             <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name"/>
+            <AddedTempList v-if="addingList" @close="closeNewList"/>
+            <AddList @new-list="openNewList" @click.stop="openNewList"/>
         </div>
     </div>
 </template>
@@ -12,49 +14,34 @@
 import LogoutMenu from '@/Layouts/Logout.vue';
 import List from '@/Components/List.vue';
 import AddList from '@/Components/AddList.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import AddedTempList from '@/Components/AddedTempList.vue'
+import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
         LogoutMenu,
         List,
         AddList,
+        AddedTempList,
         Head,
-        Link,
     },
     props: {
         'lists_arr' : Array
+    },
+    methods : {
+        openNewList() {
+            this.addingList = true;
+        },
+        closeNewList() {
+            this.addingList = false;
+        }
     }
-    // data() {
-    //     return {
-    //         users: [
-    //         {
-    //             id: 1,
-    //             name: "Adrian Schubert"
-    //         },
-    //         ],
-    //         users2: [
-    //             {
-    //                 id: 1,
-    //                 name: "Johnny Schubert"
-    //             },
-    //             {
-    //                 id: 2,
-    //                 name: "Suce"
-    //             },
-    //             {
-    //                 id: 3,
-    //                 name: "Ma Grosse"
-    //             },
-    //         ]
-    //     }
-    // },
 }
 </script>
 <style>
     .mainBoard {
         box-sizing: border-box;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 72px);
         padding: 20px;
         margin-left: 20px;
     }
