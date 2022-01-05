@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/mainboard', function () {
     return Inertia::render('Application/Mainboard');
-});
+})->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Application/Dashboard');

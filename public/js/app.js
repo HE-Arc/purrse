@@ -22483,7 +22483,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.wave[data-v-2386442e] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    overflow: hidden;\n    line-height: 0;\n    transform: rotate(180deg);\n}\n.wave svg[data-v-2386442e] {\n    position: relative;\n    display: block;\n    width: calc(100% + 1.3px);\n    height: 144;\n    transform: rotateY(180deg);\n}\n.wave .shape-fill[data-v-2386442e] {\n    fill: #374151;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.wave[data-v-2386442e] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    overflow: hidden;\r\n    line-height: 0;\r\n    transform: rotate(180deg);\n}\n.wave svg[data-v-2386442e] {\r\n    position: relative;\r\n    display: block;\r\n    width: calc(100% + 1.3px);\r\n    height: 144;\r\n    transform: rotateY(180deg);\n}\n.wave .shape-fill[data-v-2386442e] {\r\n    fill: #374151;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
