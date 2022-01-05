@@ -9,7 +9,6 @@
                 <img src="../icons/chevron-down-solid.svg" alt="Sort Down" class="chevron"/>
             </object>
         </div>
-        -->
     </li>
     <transition name="fade">
         <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay"/>
