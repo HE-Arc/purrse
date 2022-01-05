@@ -54,7 +54,7 @@ export default {
 <style>
     .mainBoard {
         box-sizing: border-box;
-        height: calc(100vh - 60px);
+        height: calc(100vh - 72px);
         padding: 20px;
         margin-left: 20px;
     }

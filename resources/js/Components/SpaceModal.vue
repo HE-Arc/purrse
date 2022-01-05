@@ -3,7 +3,7 @@
         <div class="table-cell align-middle">
             <div class="flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl" v-clickoutside="close">
                 <p class="m-5 text-3xl font-semibold font-sans tracking-wide">
-                    Ménage
+                    {{this.user.name}}
                 </p>
                 <div class="flex flex-row text-xl m-4">
                     <div class="px-7">

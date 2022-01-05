@@ -4,8 +4,13 @@
             <!-- Header menu -->
             <div class="max-w-7xl mx-auto flex justify-between header">
                 <!-- Content title -->
-                <div class="pt-4 text-2xl sm:items-center text-yellow-200">
-                    Mainboard
+                <div class="flex flex-row items-center">
+                    <div class="w-12 h-12 my-3">
+                        <img src="../icons/purrse.png"  alt="Purrse icône">
+                    </div>
+                    <div class="ml-5 mt-2 text-xl font-semibold text-yellow-200">
+                        Mainboard
+                    </div>
                 </div>
 
                 <!-- User menu -->
@@ -71,6 +76,6 @@ export default {
 </script>
 <style>
     .header {
-        min-height : 55px;
+        min-height : 60px;
     }
 </style>

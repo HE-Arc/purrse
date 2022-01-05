@@ -20703,8 +20703,21 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl"
 };
+var _hoisted_4 = {
+  "class": "m-5 text-3xl font-semibold font-sans tracking-wide"
+};
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<p class=\"m-5 text-3xl font-semibold font-sans tracking-wide\"> Ménage </p><div class=\"flex flex-row text-xl m-4\"><div class=\"px-7\"> Budget : 10&#39;000 CHF </div><div class=\"px-7\"> Transactions : 2&#39;000 CHF </div><div class=\"px-7\"> À payer : 2&#39;000 CHF </div></div>", 2);
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "flex flex-row text-xl m-4"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "px-7"
+}, " Budget : 10'000 CHF "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "px-7"
+}, " Transactions : 2'000 CHF "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "px-7"
+}, " À payer : 2'000 CHF ")], -1
+/* HOISTED */
+);
 
 var _hoisted_6 = {
   "class": "flex flex-row my-3"
@@ -20744,7 +20757,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _directive_clickoutside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("clickoutside");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.user.name), 1
+  /* TEXT */
+  ), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
     "for": "description",
     value: "Description"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
@@ -21138,14 +21153,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _icons_purrse_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../icons/purrse.png */ "./resources/js/icons/purrse.png");
+
 
 var _hoisted_1 = {
   "class": "max-w-7xl mx-auto flex justify-between header"
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "pt-4 text-2xl sm:items-center text-yellow-200"
-}, " Mainboard ", -1
+  "class": "flex flex-row items-center"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "w-12 h-12 my-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _icons_purrse_png__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: "Purrse icône"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "ml-5 mt-2 text-xl font-semibold text-yellow-200"
+}, " Mainboard ")], -1
 /* HOISTED */
 );
 
@@ -22545,7 +22569,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\r\n        min-height : 55px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\n        min-height : 60px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22617,7 +22641,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mainBoard {\r\n        box-sizing: border-box;\r\n        height: calc(100vh - 60px);\r\n        padding: 20px;\r\n        margin-left: 20px;\n}\r\n\r\n\r\n    /* width */\n::-webkit-scrollbar {\r\n    width: 8px;\r\n    height: 16px;\n}\r\n\r\n    /* Track */\n::-webkit-scrollbar-track {\n}\r\n\r\n    /* Handle */\n::-webkit-scrollbar-thumb {\r\n    background: #a0aec0;\r\n    border-radius: 80vh;\n}\r\n\r\n    /* Handle on hover */\n::-webkit-scrollbar-thumb:hover {\r\n    background: #434C5E;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mainBoard {\n        box-sizing: border-box;\n        height: calc(100vh - 72px);\n        padding: 20px;\n        margin-left: 20px;\n}\n\n\n    /* width */\n::-webkit-scrollbar {\n    width: 8px;\n    height: 16px;\n}\n\n    /* Track */\n::-webkit-scrollbar-track {\n}\n\n    /* Handle */\n::-webkit-scrollbar-thumb {\n    background: #a0aec0;\n    border-radius: 80vh;\n}\n\n    /* Handle on hover */\n::-webkit-scrollbar-thumb:hover {\n    background: #434C5E;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22895,6 +22919,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/chevron-up-solid.svg?ba714d3187830dd385006d2cdeb8a4d6");
+
+/***/ }),
+
+/***/ "./resources/js/icons/purrse.png":
+/*!***************************************!*\
+  !*** ./resources/js/icons/purrse.png ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/purrse.png?bda697d725081191dd81d741b72a5de5");
 
 /***/ }),
 
