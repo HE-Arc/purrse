@@ -6,7 +6,8 @@
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
             <List :users=users :name="'Collocation'" />
             <List :users=users2 :name="'Appartement'" />
-            <AddList />
+            <AddedTempList v-if="addingList" @close="closeNewList"/>
+            <AddList @new-list="openNewList" @click.stop="openNewList"/>
         </div>
     </div>
 </template>
@@ -15,18 +16,20 @@
 import LogoutMenu from '@/Layouts/Logout.vue';
 import List from '@/Components/List.vue';
 import AddList from '@/Components/AddList.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import AddedTempList from '@/Components/AddedTempList.vue'
+import { Head } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
         LogoutMenu,
         List,
         AddList,
+        AddedTempList,
         Head,
-        Link,
     },
     data() {
         return {
+            addingList : false,
             users: [
             {
                 id: 1,
@@ -49,6 +52,14 @@ export default {
             ]
         }
     },
+    methods : {
+        openNewList() {
+            this.addingList = true;
+        },
+        closeNewList() {
+            this.addingList = false;
+        }
+    }
 }
 </script>
 <style>

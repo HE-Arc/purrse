@@ -2,9 +2,17 @@
     <div class="fixed table top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50">
         <div class="table-cell align-middle">
             <div class="flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl" v-clickoutside="close">
-                <p class="m-5 text-3xl font-semibold font-sans tracking-wide">
-                    {{this.user.name}}
-                </p>
+                <div class="flex flex-row justify-around">
+                    <p class="m-5 text-3xl font-semibold font-sans tracking-wide">
+                        {{this.user.name}}
+                    </p>
+                    <div class="w-6 h-6 my-6">
+                        <img src="../Icons/edit_space.png"  alt="Ajouter un espace">
+                    </div>
+                    <div class="w-6 h-6 my-6">
+                        <img src="../Icons/delete_space.png"  alt="Ajouter un espace">
+                    </div>
+                </div>
                 <div class="flex flex-row text-xl m-4">
                     <div class="px-7">
                         Budget : 10'000 CHF

@@ -6,7 +6,7 @@
                 <!-- Content title -->
                 <div class="flex flex-row items-center">
                     <div class="w-12 h-12 my-3">
-                        <img src="../icons/purrse.png"  alt="Purrse icône">
+                        <img src="../Icons/purrse.png"  alt="Purrse icône">
                     </div>
                     <div class="ml-5 mt-2 text-xl font-semibold text-yellow-200">
                         Mainboard
@@ -33,7 +33,14 @@
                             <!-- Logout -->
                             <template #content>
                                 <BreezeDropdownLink :href="route('logout')" method="post" as="button">
-                                    Se déconnecter
+                                    <div class="flex flex-row">
+                                        <div class="w-6 h-6 mr-1">
+                                            <img src="../Icons/logout.png"  alt="Ajouter un espace">
+                                        </div>
+                                        <div class="mt-1">
+                                            Se déconnecter
+                                        </div>
+                                    </div>
                                 </BreezeDropdownLink>
                             </template>
                         </BreezeDropdown>
@@ -59,13 +66,13 @@
 <script>
 import BreezeDropdown from '@/Components/Dropdown.vue'
 import BreezeDropdownLink from '@/Components/DropdownLink.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
 
 export default {
     components: {
         BreezeDropdown,
         BreezeDropdownLink,
-        Link,
+        //Link,
     },
     data() {
         return {
