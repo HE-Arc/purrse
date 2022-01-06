@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </BreezeDropdownLink>
-                    <BreezeDropdownLink>
+                    <BreezeDropdownLink @click="this.$emit('deleteList', this.id)">
                         <div class="flex flex-row">
                             <div class="w-6 h-6 mr-1">
                                 <img src="../Icons/delete.png"  alt="Effacer la liste">
@@ -75,6 +75,7 @@
         },
         props: {
             spaces: Array,
+            id: Number,
             name: String,
             token: String
         },

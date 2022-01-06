@@ -33,6 +33,14 @@ Route::get('/accept/{token}', [InvitationController::class, 'accept'])->middlewa
 
 Route::get('/lists', [ListController::class, 'create'])->middleware(['auth', 'verified']);
 
+/*
+|--------------------------------------------------------------------------
+| Web routes to CRUD List table
+|--------------------------------------------------------------------------
+*/
 Route::post('newList', [ListController::class, 'createNewList']);
+Route::post('updateList', [ListController::class, 'updateList']);
+Route::post('deleteList', [ListController::class, 'deleteList']);
+
 
 require __DIR__ . '/auth.php';

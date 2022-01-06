@@ -3,7 +3,7 @@
     <div class="bg-gray-700 min-h-screen h-full">
         <LogoutMenu/>
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
-            <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name" :token="list.token"/>
+            <List @deleteList="deleteList" v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :id="list.id" :name="list.name" :token="list.token"/>
             <AddedTempList v-if="addingList" @newList="newList" @close="closeNewList"/>
             <AddList @new-list="openNewList" @click.stop="openNewList"/>
         </div>
@@ -53,10 +53,29 @@ export default {
                     .then(res => {
                         this.lists_arr.push(res.data);
                     }).catch(err => {
-                    console.log(err);
-                })
+                        console.log(err);
+                    })
                 this.closeNewList(); //Close the modal
             }
+        },
+        //Delete a specific list with the id
+        deleteList(listId){
+            let data = {
+                id: listId
+            }
+            let idArray = null;
+            axios.post('/deleteList', data) //Remove the list in the database
+                .then(res =>{
+                    this.lists_arr.forEach(list => {
+                        if(list.id == listId){ //Find the position of the list in the array to delete
+                            idArray = this.lists_arr.indexOf(list);
+                        }
+                    });
+                    this.lists_arr.splice(idArray,1);//Remove the list in array
+                }).catch(err => {
+                    console.log(err);
+                });
+
         }
     }
 }

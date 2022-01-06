@@ -24,15 +24,15 @@ class ListController extends Controller
         $lists = Lists::all()->toArray();
         $spaces = Space::all()->toArray();
         $expenses = Expense::all()->toArray();
-        for($i = 0; $i < count($spaces); $i++){
+        for ($i = 0; $i < count($spaces); $i++) {
             $spaces[$i]['expenses'] = [];
-            for($j = 0; $j < count($expenses); $j++){
-                if($spaces[$i]['id'] == $expenses[$j]['space_id']){
-                    array_push($spaces[$i]['expenses'],$expenses[$j]);
+            for ($j = 0; $j < count($expenses); $j++) {
+                if ($spaces[$i]['id'] == $expenses[$j]['space_id']) {
+                    array_push($spaces[$i]['expenses'], $expenses[$j]);
                 }
             }
         }
-        for($i = 0; $i < count($lists); $i++){
+        for ($i = 0; $i < count($lists); $i++) {
             $lists[$i]['spaces'] = [];
             for ($j = 0; $j < count($spaces); $j++) {
                 if ($lists[$i]['id'] == $spaces[$j]['list_id']) {
@@ -50,6 +50,7 @@ class ListController extends Controller
      * route : /newList
      * Create a new list and generate a token for the list.
      * Create a entry in the table user_to_list, to link the user to the new list
+     * @return \Illuminate\Http\Response
      */
     public function createNewList(Request $request)
     {
@@ -68,7 +69,40 @@ class ListController extends Controller
             'list_id' => $newList->id,
         ]);
 
-        //Return the responde of the axios->post
+        //Return the response of the axios->post
         return response()->json($newList);
+    }
+
+    /**
+     * route : /updateList
+     * Update the list with data in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function updateList(Request $request)
+    {
+        $listData = $request->all();
+
+        $list = Lists::find($listData['id'])->update([
+            'name' => $listData['name'],
+            'image' => $listData['image']
+        ]);
+
+        //Return the response of the axios->post
+        return response()->json('updated');
+    }
+
+    /**
+     * route : /deleteList
+     * Delete the list with is id in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteList(Request $request)
+    {
+        $listId = $request->all();
+
+        $list = Lists::find($listId['id']);
+        $list->delete();
+
+        return response()->json('deleted');
     }
 }

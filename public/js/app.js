@@ -19459,12 +19459,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {
-      title: "Papier toilette",
-      price: 20,
-      date: "05.10.2021"
-    };
+  props: {
+    name: String,
+    cost: Number,
+    date: Date
   }
 });
 
@@ -19538,6 +19536,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     spaces: Array,
+    id: Number,
     name: String,
     token: String
   },
@@ -19638,7 +19637,8 @@ __webpack_require__.r(__webpack_exports__);
     description: String,
     budget: Number,
     total: Number,
-    to_pay: Number
+    to_pay: Number,
+    expenses: Array
   },
   data: function data() {
     return {
@@ -19681,7 +19681,9 @@ __webpack_require__.r(__webpack_exports__);
     description: String,
     budget: Number,
     total: Number,
-    to_pay: Number
+    to_pay: Number,
+    expenses: Array,
+    space_id: Number
   },
   components: {
     BreezeInput: _Components_Input_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -19692,6 +19694,21 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     close: function close() {
       this.$emit('close');
+    },
+    newList: function newList() {
+      var _this = this;
+
+      var data = {
+        name: 'bob',
+        image: 'bob.png'
+      };
+      axios.post('/api/newList', data).then(function (res) {
+        _this.lists_arr.push(res.data);
+
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err.response);
+      });
     }
   },
   data: function data() {
@@ -19993,6 +20010,29 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.closeNewList(); //Close the modal
       }
+    },
+    //Delete a specific list with the id
+    deleteList: function deleteList(listId) {
+      var _this2 = this;
+
+      var data = {
+        id: listId
+      };
+      var idArray = null;
+      axios__WEBPACK_IMPORTED_MODULE_5___default().post('/deleteList', data) //Remove the list in the database
+      .then(function (res) {
+        _this2.lists_arr.forEach(function (list) {
+          if (list.id == listId) {
+            //Find the position of the list in the array to delete
+            idArray = _this2.lists_arr.indexOf(list);
+          }
+        });
+
+        _this2.lists_arr.splice(idArray, 1); //Remove the list in array
+
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   }
 });
@@ -20718,9 +20758,9 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.title), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.name), 1
   /* TEXT */
-  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.price) + " CHF ", 1
+  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.cost) + " CHF ", 1
   /* TEXT */
   ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.date), 1
   /* TEXT */
@@ -20887,6 +20927,8 @@ var _hoisted_9 = {
   "class": "w-60 max-w-sm h-full overflow-y-auto"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_BreezeDropdownLink = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BreezeDropdownLink");
 
   var _component_BreezeDropdown = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BreezeDropdown");
@@ -20931,7 +20973,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeDropdownLink, null, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeDropdownLink, {
+        onClick: _cache[0] || (_cache[0] = function ($event) {
+          return _this.$emit('deleteList', _this.id);
+        })
+      }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_8];
         }),
@@ -20950,10 +20996,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       budget: space.budget,
       total: space.total,
       to_pay: space.to_pay,
-      name: space.name
+      name: space.name,
+      expenses: space.expenses
     }, null, 8
     /* PROPS */
-    , ["description", "budget", "total", "to_pay", "name"]);
+    , ["description", "budget", "total", "to_pay", "name", "expenses"]);
   }), 128
   /* KEYED_FRAGMENT */
   )), this.addingSpace ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempSpace, {
@@ -21094,10 +21141,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         description: $props.description,
         budget: $props.budget,
         total: $props.total,
-        to_pay: $props.to_pay
+        to_pay: $props.to_pay,
+        expenses: $props.expenses,
+        space_id: _ctx.space.id
       }, null, 8
       /* PROPS */
-      , ["onClose", "description", "budget", "total", "to_pay"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+      , ["onClose", "description", "budget", "total", "to_pay", "expenses", "space_id"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -21173,7 +21222,7 @@ var _hoisted_11 = {
   "class": "px-7"
 };
 var _hoisted_12 = {
-  "class": "flex flex-row my-3"
+  "class": "mx-5"
 };
 var _hoisted_13 = {
   "class": "mx-5"
@@ -21182,21 +21231,18 @@ var _hoisted_14 = {
   "class": "mx-5"
 };
 var _hoisted_15 = {
-  "class": "mx-5"
-};
-var _hoisted_16 = {
   "class": "mx-5 mt-7"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Register ");
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Register ");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "m-5 text-xl font-semibold font-sans tracking-wide"
 }, " Entrées ", -1
 /* HOISTED */
 );
 
-var _hoisted_19 = {
+var _hoisted_18 = {
   "class": "w-full border-t-2 border-yellow-200 overflow-y-auto"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21218,7 +21264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, " À payer : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.to_pay) + " CHF ", 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
     "for": "description",
     value: "Description"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
@@ -21234,7 +21280,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "description"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
     "for": "montant",
     value: "Montant"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
@@ -21250,7 +21296,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "montant"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
     "for": "date",
     value: "Date"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
@@ -21266,14 +21312,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "date"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, null, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_17];
+      return [_hoisted_16];
     }),
     _: 1
     /* STABLE */
 
-  })])]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Entry)])], 512
+  })]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.expenses, function (expense) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Entry, {
+      key: expense.id,
+      name: expense.name,
+      cost: expense.cost,
+      date: expense.date
+    }, null, 8
+    /* PROPS */
+    , ["name", "cost", "date"]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])], 512
   /* NEED_PATCH */
   ), [[_directive_clickoutside, $options.close]])])]);
 }
@@ -22064,13 +22121,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Mainboard"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_LogoutMenu), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.lists_arr, function (list) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_List, {
+      onDeleteList: $options.deleteList,
       key: list.id,
       spaces: list.spaces,
+      id: list.id,
       name: list.name,
       token: list.token
     }, null, 8
     /* PROPS */
-    , ["spaces", "name", "token"]);
+    , ["onDeleteList", "spaces", "id", "name", "token"]);
   }), 128
   /* KEYED_FRAGMENT */
   )), $data.addingList ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempList, {
