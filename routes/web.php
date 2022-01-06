@@ -33,6 +33,8 @@ Route::get('/invite/{token}', [InvitationController::class, 'create'])->middlewa
 
 Route::get('/accept/{token}', [InvitationController::class, 'accept'])->middleware(['auth', 'verified']);
 
-Route::get('/lists', [ListController::class, 'create']);
+Route::get('/lists', [ListController::class, 'create'])->middleware(['auth', 'verified']);
+
+Route::post('newList', [ListController::class, 'createNewList']);
 
 require __DIR__ . '/auth.php';

@@ -3,9 +3,9 @@
     <div class="bg-gray-700 min-h-screen h-full">
         <LogoutMenu/>
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
-            <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name"/>
+            <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name" :token="list.token"/>
             <AddedTempList v-if="addingList" @close="closeNewList"/>
-            <AddList @new-list="openNewList" @click.stop="openNewList"/>
+            <AddList @click="newList" @new-list="openNewList" @click.stop="openNewList"/>
         </div>
     </div>
 </template>
@@ -16,6 +16,7 @@ import List from '@/Components/List.vue';
 import AddList from '@/Components/AddList.vue';
 import AddedTempList from '@/Components/AddedTempList.vue'
 import { Head } from '@inertiajs/inertia-vue3';
+import axios from 'axios';
 
 export default {
     components: {
@@ -34,6 +35,19 @@ export default {
         },
         closeNewList() {
             this.addingList = false;
+        },
+        newList(){
+            let data = {
+                name: 'bob',
+                image: 'bob.png'
+            }
+            axios.post('/newList', data)
+                .then(res => {
+                    this.lists_arr.push(res.data);
+                    console.log(res.data);
+                }).catch(err => {
+                console.log(err.response);
+            })
         }
     }
 }

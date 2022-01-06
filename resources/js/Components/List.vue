@@ -75,7 +75,8 @@
         },
         props: {
             spaces: Array,
-            name: String
+            name: String,
+            token: String
         },
         data() {
             return {
@@ -84,11 +85,8 @@
         },
         methods:{
             share() {
-                /* Get the token from the list */
-                var shareToken = "Salut comment ça va";
-
-                /* Copy the token inside the clipboard */
-                navigator.clipboard.writeText(shareToken);
+                //Paste to the clipboard the invitation link
+                navigator.clipboard.writeText(window.location.host + '/invite/' + this.token);
             },
             openNewSpace() {
                 this.addingSpace = true;
