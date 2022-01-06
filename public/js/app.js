@@ -19225,9 +19225,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      form: this.$inertia.form({
-        list_name: ''
-      })
+      list_name: ''
     };
   },
   methods: {
@@ -19962,6 +19960,11 @@ __webpack_require__.r(__webpack_exports__);
     AddedTempList: _Components_AddedTempList_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Head
   },
+  data: function data() {
+    return {
+      addingList: false
+    };
+  },
   props: {
     'lists_arr': Array
   },
@@ -19972,20 +19975,24 @@ __webpack_require__.r(__webpack_exports__);
     closeNewList: function closeNewList() {
       this.addingList = false;
     },
-    newList: function newList() {
+    //Send to the controller the new list to create
+    newList: function newList(listName) {
       var _this = this;
 
       var data = {
-        name: 'bob',
-        image: 'bob.png'
+        name: listName,
+        image: listName + '.png'
       };
-      axios__WEBPACK_IMPORTED_MODULE_5___default().post('/newList', data).then(function (res) {
-        _this.lists_arr.push(res.data);
 
-        console.log(res.data);
-      })["catch"](function (err) {
-        console.log(err.response);
-      });
+      if (listName != '') {
+        //Create the list only when the name is not empty
+        axios__WEBPACK_IMPORTED_MODULE_5___default().post('/newList', data).then(function (res) {
+          _this.lists_arr.push(res.data);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+        this.closeNewList(); //Close the modal
+      }
     }
   }
 });
@@ -20416,27 +20423,32 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_BreezeInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BreezeInput");
 
   var _directive_clickoutside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("clickoutside");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
+    onKeyup: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+      return _this.$emit('newList', $data.list_name);
+    }, ["enter"])),
     id: "list_name",
     type: "text",
     "class": "block w-40",
-    modelValue: $data.form.list_name,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.form.list_name = $event;
+    modelValue: $data.list_name,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.list_name = $event;
     }),
     required: "",
     autofocus: "",
     autocomplete: "list_name"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: _Icons_close_png__WEBPACK_IMPORTED_MODULE_1__["default"],
     alt: "Annuler l'ajout de liste",
-    onClick: _cache[1] || (_cache[1] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.close && $options.close.apply($options, arguments);
     })
   })])]), _hoisted_4], 512
@@ -22061,17 +22073,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["spaces", "name", "token"]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), _ctx.addingList ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempList, {
+  )), $data.addingList ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempList, {
     key: 0,
+    onNewList: $options.newList,
     onClose: $options.closeNewList
   }, null, 8
   /* PROPS */
-  , ["onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddList, {
-    onClick: [$options.newList, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.openNewList, ["stop"])],
-    onNewList: $options.openNewList
+  , ["onNewList", "onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddList, {
+    onNewList: $options.openNewList,
+    onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.openNewList, ["stop"])
   }, null, 8
   /* PROPS */
-  , ["onClick", "onNewList"])])])], 64
+  , ["onNewList", "onClick"])])])], 64
   /* STABLE_FRAGMENT */
   );
 }

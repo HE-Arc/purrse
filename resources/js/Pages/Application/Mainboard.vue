@@ -4,8 +4,8 @@
         <LogoutMenu/>
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
             <List v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :name="list.name" :token="list.token"/>
-            <AddedTempList v-if="addingList" @close="closeNewList"/>
-            <AddList @click="newList" @new-list="openNewList" @click.stop="openNewList"/>
+            <AddedTempList v-if="addingList" @newList="newList" @close="closeNewList"/>
+            <AddList @new-list="openNewList" @click.stop="openNewList"/>
         </div>
     </div>
 </template>
@@ -26,6 +26,11 @@ export default {
         AddedTempList,
         Head,
     },
+    data(){
+        return{
+            addingList : false,
+        };
+    },
     props: {
         'lists_arr' : Array
     },
@@ -36,18 +41,22 @@ export default {
         closeNewList() {
             this.addingList = false;
         },
-        newList(){
+        //Send to the controller the new list to create
+        newList(listName){
             let data = {
-                name: 'bob',
-                image: 'bob.png'
+                name: listName,
+                image: listName+'.png'
             }
-            axios.post('/newList', data)
-                .then(res => {
-                    this.lists_arr.push(res.data);
-                    console.log(res.data);
-                }).catch(err => {
-                console.log(err.response);
-            })
+
+            if(listName != ''){//Create the list only when the name is not empty
+                axios.post('/newList', data)
+                    .then(res => {
+                        this.lists_arr.push(res.data);
+                    }).catch(err => {
+                    console.log(err);
+                })
+                this.closeNewList(); //Close the modal
+            }
         }
     }
 }
