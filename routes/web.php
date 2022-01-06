@@ -21,9 +21,7 @@ Route::get('/', function () {
     return Inertia::render('Application/Home');
 });
 
-Route::get('/mainboard', function () {
-    return Inertia::render('Application/Mainboard');
-})->middleware(['auth', 'verified']);
+Route::get('/mainboard', [ListController::class, 'create'])->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Application/Dashboard');

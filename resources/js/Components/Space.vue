@@ -11,7 +11,7 @@
         </div>
     </li>
     <transition name="fade">
-        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay"/>
+        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay" :expenses="expenses" :space_id="space.id"/>
     </transition>
 </template>
 <script>
@@ -26,7 +26,8 @@
             description: String,
             budget: Number,
             total: Number,
-            to_pay: Number
+            to_pay: Number,
+            expenses: Array
         },
         data() {
             return {
