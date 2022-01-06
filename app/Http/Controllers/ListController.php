@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Lists;
 use App\Models\Space;
+use App\Models\Expense;
 use SebastianBergmann\Environment\Console;
 
 class ListController extends Controller
@@ -23,6 +24,15 @@ class ListController extends Controller
     {
         $lists = Lists::all()->toArray();
         $spaces = Space::all()->toArray();
+        $expenses = Expense::all()->toArray();
+        for($i = 0; $i < count($spaces); $i++){
+            $spaces[$i]['expenses'] = [];
+            for($j = 0; $j < count($expenses); $j++){
+                if($spaces[$i]['id'] == $expenses[$j]['space_id']){
+                    array_push($spaces[$i]['expenses'],$expenses[$j]);
+                }
+            }
+        }
         for($i = 0; $i < count($lists); $i++){
             $lists[$i]['spaces'] = [];
             for($j = 0; $j < count($spaces); $j++){

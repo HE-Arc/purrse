@@ -14,46 +14,38 @@
                     </div>
                 </div>
                 <div class="flex flex-row text-xl m-4">
-                    <div class="px-7">
-                        Budget : {{budget}} CHF
-                    </div>
-                    <div class="px-7">
-                        Transactions : {{total}} CHF
-                    </div>
-                    <div class="px-7">
-                        À payer : {{to_pay}} CHF
-                    </div>
+                <div class="px-7">
+                    Budget : {{budget}} CHF
                 </div>
-                <form class="flex flex-row my-3">
-                    <div class="mx-5">
-                        <BreezeLabel for="description" value="Description" />
-                        <BreezeInput id="description" type="text" class="mt-1 block w-full" v-model="form.description" required autofocus autocomplete="description" />
-                    </div>
-                    <div class="mx-5">
-                        <BreezeLabel for="montant" value="Montant" />
-                        <BreezeInput id="montant" type="text" class="mt-1 block w-full" v-model="form.montant" required autofocus autocomplete="montant" />
-                    </div>
-                    <div class="mx-5">
-                        <BreezeLabel for="date" value="Date" />
-                        <BreezeInput id="date" type="text" class="mt-1 block w-full" v-model="form.date" required autofocus autocomplete="date" />
-                    </div>
-                    <div class="mx-5 mt-7">
-                        <BreezeButton>
-                            Register
-                        </BreezeButton>
-                    </div>
-                </form>
+                <div class="px-7">
+                    Transactions : {{total}} CHF
+                </div>
+                <div class="px-7">
+                    À payer : {{to_pay}} CHF
+                </div>
+            </div>
+                <div class="mx-5">
+                    <BreezeLabel for="description" value="Description" />
+                    <BreezeInput id="description" type="text" class="mt-1 block w-full" v-model="form.description" required autofocus autocomplete="description" />
+                </div>
+                <div class="mx-5">
+                    <BreezeLabel for="montant" value="Montant" />
+                    <BreezeInput id="montant" type="text" class="mt-1 block w-full" v-model="form.montant" required autofocus autocomplete="montant" />
+                </div>
+                <div class="mx-5">
+                    <BreezeLabel for="date" value="Date" />
+                    <BreezeInput id="date" type="text" class="mt-1 block w-full" v-model="form.date" required autofocus autocomplete="date" />
+                </div>
+                <div class="mx-5 mt-7">
+                    <BreezeButton>
+                        Register
+                    </BreezeButton>
+                </div>
                 <div class="m-5 text-xl font-semibold font-sans tracking-wide">
                     Entrées
                 </div>
                 <div class="w-full border-t-2 border-yellow-200 overflow-y-auto">
-                    <Entry/>
-                    <Entry/>
-                    <Entry/>
-                    <Entry/>
-                    <Entry/>
-                    <Entry/>
-                    <Entry/>
+                    <Entry v-for="expense in expenses" :key="expense.id" :name="expense.name" :cost="expense.cost" :date="expense.date"/>
                 </div>
             </div>
         </div>
@@ -70,7 +62,9 @@ export default {
             description: String,
             budget: Number,
             total: Number,
-            to_pay: Number
+            to_pay: Number,
+            expenses: Array,
+            space_id: Number
         },
     components : {
         BreezeInput,
@@ -81,6 +75,19 @@ export default {
     methods : {
         close() {
             this.$emit('close');
+        },
+        newList(){
+            let data = {
+                name: 'bob',
+                image: 'bob.png'
+            }
+            axios.post('/api/newList', data)
+                .then(res => {
+                    this.lists_arr.push(res.data);
+                    console.log(res.data);
+                }).catch(err => {
+                console.log(err.response);
+            })
         }
     },
     data() {
