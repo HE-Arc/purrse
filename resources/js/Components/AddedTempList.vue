@@ -1,9 +1,7 @@
 <template>
     <div class="flex items-center justify-center flex-col mr-10 bg-gray-300 rounded-lg" v-clickoutside="close">
         <div class="flex flex-row m-5">
-            <form>
-                <BreezeInput id="list_name" type="text" class="block w-40" v-model="form.list_name" required autofocus autocomplete="list_name" />
-            </form>
+            <BreezeInput id="list_name" type="text" class="block w-40" v-model="list_name" required autofocus autocomplete="list_name" />
             <div class="ml-3 mt-2 w-6 h-6">
                 <img src="../Icons/close.png"  alt="Annuler l'ajout de liste" @click="close">
             </div>

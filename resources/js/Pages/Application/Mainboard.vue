@@ -7,7 +7,7 @@
             <List :users=users :name="'Collocation'" />
             <List :users=users2 :name="'Appartement'" />
             <AddedTempList v-if="addingList" @close="closeNewList"/>
-            <AddList @new-list="openNewList" @click.stop="openNewList"/>
+            <AddList @new-list="openNewList"/>
         </div>
     </div>
 </template>

@@ -2,15 +2,23 @@
     <div class="fixed table top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50">
         <div class="table-cell align-middle">
             <div class="flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl" v-clickoutside="close">
+                <ConfirmModal v-if="isDeleting" @close="stopDeleting" @click.stop/>
+
                 <div class="flex flex-row justify-around">
-                    <p class="m-5 text-3xl font-semibold font-sans tracking-wide">
+                    <p v-if="!isEditingSpaceName" class="m-5 text-3xl font-semibold font-sans tracking-wide">
                         {{this.user.name}}
                     </p>
-                    <div class="w-6 h-6 my-6">
-                        <img src="../Icons/edit_space.png"  alt="Ajouter un espace">
+                    <div v-if="isEditingSpaceName" class="flex flex-row m-5">
+                        <BreezeInput id="space_name" type="text" class="block w-40" v-model="space_name" required autofocus autocomplete="space_name" />
+                        <div class="ml-3 mt-2 w-6 h-6">
+                            <img src="../Icons/close_space.png"  alt="Annuler l'ajout de liste" @click.stop="stopEditingSpaceName">
+                        </div>
                     </div>
                     <div class="w-6 h-6 my-6">
-                        <img src="../Icons/delete_space.png"  alt="Ajouter un espace">
+                        <img src="../Icons/edit_space.png"  alt="Modifier le nom de l'espace" @click="startEditingSpaceName">
+                    </div>
+                    <div class="w-6 h-6 my-6">
+                        <img src="../Icons/delete_space.png"  alt="Supprimer l'espace" @click.stop="startDeleting">
                     </div>
                 </div>
                 <div class="flex flex-row text-xl m-4">
@@ -60,21 +68,35 @@
     </div>
 </template>
 <script>
-import BreezeInput from '@/Components/Input.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeButton from '@/Components/Button.vue'
-import Entry from '@/Components/Entry.vue'
+import BreezeInput from '@/Components/Input.vue';
+import BreezeLabel from '@/Components/Label.vue';
+import BreezeButton from '@/Components/Button.vue';
+import Entry from '@/Components/Entry.vue';
+import ConfirmModal from '@/Components/ConfirmModal.vue';
 
 export default {
     components : {
         BreezeInput,
         BreezeLabel,
         BreezeButton,
-        Entry
+        Entry,
+        ConfirmModal
     },
     methods : {
         close() {
             this.$emit('close');
+        },
+        startEditingSpaceName(){
+            this.isEditingSpaceName=true;
+        },
+        stopEditingSpaceName(){
+            this.isEditingSpaceName=false;
+        },
+        startDeleting(){
+            this.isDeleting=true;
+        },
+        stopDeleting(){
+            this.isDeleting=false;
         }
     },
     props: ['user'],
@@ -84,7 +106,10 @@ export default {
                 description: '',
                 montant: '',
                 date: ''
-            })
+            }),
+            isEditingSpaceName : false,
+            isDeleting : false,
+            space_name : ''
         }
     },
     directives : {
