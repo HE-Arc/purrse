@@ -88,21 +88,20 @@ export default {
         margin-left: 20px;
     }
 
-
     /* width */
     ::-webkit-scrollbar {
-    width: 8px;
-    height: 16px;
+        width: 8px;
+        height: 16px;
     }
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-    background: #a0aec0;
-    border-radius: 80vh;
+        background: #a0aec0;
+        border-radius: 80vh;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-    background: #434C5E;
+        background: #434C5E;
     }
 </style>

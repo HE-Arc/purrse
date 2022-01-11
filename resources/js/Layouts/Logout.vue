@@ -5,16 +5,16 @@
             <div class="max-w-7xl mx-auto flex justify-between header">
                 <!-- Content title -->
                 <div class="flex flex-row items-center">
-                    <div class="w-12 h-12 my-3">
+                    <div class="w-9 h-9 mt-1 ml-5 lg:w-12 lg:h-12 lg:my-3">
                         <img src="../Icons/purrse.png"  alt="Purrse icône">
                     </div>
-                    <div class="ml-5 mt-2 text-xl font-semibold text-yellow-200">
+                    <div class="ml-5 mt-2 lg:ml-5 lg:mt-2 text-xl font-semibold text-yellow-200">
                         Mainboard
                     </div>
                 </div>
 
                 <!-- User menu -->
-                <div class="sm:flex sm:items-center sm:ml-6">
+                <div class="mt-4 mr-2 sm:flex sm:items-center sm:ml-6 lg:mt-0">
                     <!-- Settings Dropdown -->
                     <div class="ml-3 relative">
                         <BreezeDropdown align="right" width="48">
