@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Space extends Model
 {
+    public $timestamps = false;
     protected $fillable = [
         'list_id',
         'name',
@@ -13,5 +14,3 @@ class Space extends Model
         'to_pay',
     ];
 }
-
-?>

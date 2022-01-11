@@ -65,7 +65,7 @@
         </div>
         <ul class="w-60 max-w-sm h-full overflow-y-auto">
             <Space v-for="space in spaces" :key="space.id" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :name="space.name" :expenses="space.expenses" :space_id="space.id"/>
-            <AddedTempSpace v-if="isAddingNewSpace" @customClose="stopAddingSpace"/>
+            <AddedTempSpace v-if="isAddingNewSpace" @newSpace="newSpace" @customClose="stopAddingSpace"/>
         </ul>
     </div>
 </template>
@@ -126,6 +126,27 @@
             updateList(){
                 this.stopEditingListName();
                 this.$emit('updateList', [this.id,this.list_name]);
+            },
+            //Send to the controller the new space to create
+            newSpace(spaceName){
+                let data = { //Data of the space
+                    list_id: this.id,
+                    name: spaceName,
+                    description: 'Description vide',
+                    budget: 0,
+                    total: 0,
+                    to_pay: 0
+                };
+
+                if(spaceName != ''){ //Create the space only if there is a name
+                    axios.post('/newSpace', data) //Send to the route newSpace the data
+                        .then(res => {
+                            this.spaces.push(res.data) //Add the space in the array
+                        }).catch(err => {
+                            console.log(err);
+                        });
+                    this.stopAddingSpace(); //Close the tempSpace
+                }
             }
         }
     }

@@ -18,9 +18,11 @@ class SpaceController extends Controller
 
         $newSpace = Space::create([
             'list_id' => $spaceData['list_id'],
-            'image' => $spaceData['name'],
+            'name' => $spaceData['name'],
             'description' => $spaceData['description'],
-            'budget' => $spaceData['budget']
+            'budget' => doubleval($spaceData['budget']),
+            'total' => doubleval($spaceData['total']),
+            'to_pay' => doubleval($spaceData['to_pay'])
         ]);
 
         //Return the response of the axios->post
