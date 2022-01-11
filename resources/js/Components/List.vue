@@ -171,6 +171,7 @@
                     this.stopAddingSpace(); //Close the tempSpace
                 }
             },
+            //Delete a space in the list
             deleteSpaceInList(space_id){
                 let data = { id: space_id }
                 let idArray = null;
@@ -178,11 +179,11 @@
                     .then(res => {
                         if(res.data){
                             this.spaces.forEach(space => {
-                                if(space.id == space_id){ //Find the position of the list in the array to delete
+                                if(space.id == space_id){ //Find the position of the space in the array to delete
                                     idArray = this.spaces.indexOf(space);
                                 }
                             });
-                            this.spaces.splice(idArray,1);//Remove the list in array
+                            this.spaces.splice(idArray,1);//Remove the space in array
                         }
                     }).catch(err => {
                     console.log(err);

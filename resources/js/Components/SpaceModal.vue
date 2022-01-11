@@ -179,6 +179,7 @@ export default {
         }
     },
     computed: {
+        //Compute the base value of all expenses for the transaction
         totalTransactions(){
             let sum = 0;
             if(this.expenses) {
@@ -188,6 +189,7 @@ export default {
             }
             return sum;
         },
+        //Compute the base value of all expenses for the total
         totalToPay(){
             let sum = 0;
             if(this.expenses){
@@ -222,6 +224,7 @@ export default {
                 })
             }
         },
+        //Delete an expense
         deleteExpense(expense_id){
             let data = { id: expense_id }
             let idArray = null;
@@ -229,11 +232,11 @@ export default {
                 .then(res => {
                     if(res.data){
                         this.expenses.forEach(expense => {
-                            if(expense.id == expense_id){ //Find the position of the list in the array to delete
+                            if(expense.id == expense_id){ //Find the position of the expense in the array to delete
                                 idArray = this.expenses.indexOf(expense);
                             }
                         });
-                        this.expenses.splice(idArray,1);//Remove the list in array
+                        this.expenses.splice(idArray,1);//Remove the expense in array
                     }
                 }).catch(err => {
                 console.log(err);

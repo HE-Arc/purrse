@@ -35,6 +35,7 @@
             closeModal() {
                 this.showModal = false;
             },
+            //Update space informations both in database and locally afterwards
             updateSpace(data){
                 axios.post('/updateSpace', data)
                     .then(res => {

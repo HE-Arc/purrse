@@ -17,20 +17,25 @@ use App\Models\Expense;
 class ListController extends Controller
 {
     /**
-     * Display the login view.
+     * Display the mainboard view.
      *
      * @return \Inertia\Response
      */
     public function create(Request $request)
     {
+        //Get all lists id related to the connected users
         $list_id = UserToList::where('user_id', Auth::id())->get('list_id');
+        //Get lists from lists id
         $lists = Lists::whereIn('id', $list_id)->get()->toArray();
         for ($i = 0; $i < count($lists); $i++) {
+            //Get Spaces tied to this list
             $spaces = Space::where('list_id', $lists[$i]['id'])->get()->toArray();
             for ($j = 0; $j < count($spaces); $j++) {
+                //Get Expenses tied to this space
                 $expenses = Expense::where('space_id', $spaces[$j]['id'])->get()->toArray();
                 $spaces[$j]['expenses'] = [];
                 foreach ($expenses as $expense){
+                    //Get the username that created the expense
                     $expense['user'] = User::where('id', $expense['user_id'])->get('username')[0]['username'];
                     array_push($spaces[$j]['expenses'],$expense);
                 }
@@ -40,7 +45,6 @@ class ListController extends Controller
                 array_push($lists[$i]['spaces'], $space);
             }
         }
-        //print_r($lists);
 
         return Inertia::render('Application/Mainboard', [
             'lists_arr' => $lists

@@ -28,11 +28,13 @@ export default {
     },
     methods:{
         changePaid(){
+            //Set locally the value of checked
             this.expense.is_paid = this.isPaid
             let data = {
                 id: this.expense.id,
                 paid: this.isPaid
             }
+            //Changed on the database
             axios.post('/updateExpense', data)
                 .then(res => {
                 }).catch(err => {
@@ -42,6 +44,7 @@ export default {
     },
     data(){
         return{
+            //If expense is already paid isPaid is set to true if not then to false
             isPaid: this.expense.is_paid == 1 ? true : false
         }
     }
