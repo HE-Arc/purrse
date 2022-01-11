@@ -83,14 +83,16 @@ class ListController extends Controller
     {
         $listData = $request->all();
 
-        $list = Lists::where('id', $listData['id']);
-
-        $list->update([
-            'name' => $listData['name']
-        ]);
-
-        //Return the response of the axios->post
-        return response()->json($list->get()[0]);
+        $list = Lists::where('id', $listData['id'])->where('owner_id', Auth::id());
+        $listCollection = $list->first();
+        if ($listCollection) {
+            $list->update([
+                'name' => $listData['name']
+            ]);
+            return response()->json($listCollection->fresh());
+        }else{
+            return response()->json("false");
+        }
     }
 
     /**

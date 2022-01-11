@@ -67,12 +67,14 @@ export default {
             let idArray = null;
             axios.post('/updateList', data) //Rename the list in th database
                 .then(res =>{
-                    this.lists_arr.forEach(list => {
-                        if(list.id == data.id){ //Find the position of the list in the array to replace
-                            idArray = this.lists_arr.indexOf(list);
-                        }
-                    });
-                    this.lists_arr.splice(idArray, 1, res.data); //Replace the old list
+                    if(res.data != 'false'){
+                        this.lists_arr.forEach(list => {
+                            if(list.id == data.id){ //Find the position of the list in the array to replace
+                                idArray = this.lists_arr.indexOf(list);
+                            }
+                        });
+                        this.lists_arr.splice(idArray, 1, res.data); //Replace the old list
+                    }
                 }).catch(err => {
                     console.log(err);
                 });
