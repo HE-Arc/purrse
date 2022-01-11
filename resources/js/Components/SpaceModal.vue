@@ -117,7 +117,11 @@ export default {
         return {
             expenseName: '',
             montant: 0,
-            date: ''
+            date: '',
+            isEditing : false,
+            isDeleting : false,
+            space_name : '',
+            space_budget : ''
         }
     },
     methods : {
@@ -131,25 +135,15 @@ export default {
                 montant: this.montant,
                 date: this.date
             }
-            console.log("ouais");
             if(this.expenseName != ''){//Create the list only when the name is not empty
-                console.log("ouais2");
                 axios.post('/newExpense', data)
                     .then(res => {
                         console.log(res);
                         this.expenses.push(res.data);
                     }).catch(err => {
-                    console.log("aa");
                     console.log(err);
                 })
             }
-            axios.post('/api/newList', data)
-                .then(res => {
-                    this.lists_arr.push(res.data);
-                    console.log(res.data);
-                }).catch(err => {
-                console.log(err.response);
-            })
         },
         startEditingSpaceName(){
             this.isEditing=true;
@@ -162,19 +156,6 @@ export default {
         },
         stopDeleting(){
             this.isDeleting=false;
-        }
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                description: '',
-                montant: '',
-                date: ''
-            }),
-            isEditing : false,
-            isDeleting : false,
-            space_name : '',
-            space_budget : ''
         }
     },
     directives : {

@@ -19705,20 +19705,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Components_SpaceModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/SpaceModal.vue */ "./resources/js/Components/SpaceModal.vue");
+var _props;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     SpaceModal: _Components_SpaceModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {
+  props: (_props = {
     space_id: Number,
     name: String,
     description: String,
     budget: Number,
     total: Number,
-    to_pay: Number,
-    expenses: Array
-  },
+    to_pay: Number
+  }, _defineProperty(_props, "space_id", Number), _defineProperty(_props, "expenses", Array), _props),
   data: function data() {
     return {
       showModal: false
@@ -19752,6 +19755,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Button_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Button.vue */ "./resources/js/Components/Button.vue");
 /* harmony import */ var _Components_Entry_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/Entry.vue */ "./resources/js/Components/Entry.vue");
 /* harmony import */ var _Components_ConfirmModal_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/ConfirmModal.vue */ "./resources/js/Components/ConfirmModal.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -19773,24 +19779,41 @@ __webpack_require__.r(__webpack_exports__);
     Entry: _Components_Entry_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     ConfirmModal: _Components_ConfirmModal_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
+  data: function data() {
+    return {
+      expenseName: '',
+      montant: 0,
+      date: '',
+      isEditing: false,
+      isDeleting: false,
+      space_name: '',
+      space_budget: ''
+    };
+  },
   methods: {
     close: function close() {
       this.$emit('close');
     },
-    newList: function newList() {
+    newExpense: function newExpense() {
       var _this = this;
 
       var data = {
-        name: 'bob',
-        image: 'bob.png'
+        space_id: this.space_id,
+        name: this.expenseName,
+        montant: this.montant,
+        date: this.date
       };
-      axios.post('/api/newList', data).then(function (res) {
-        _this.lists_arr.push(res.data);
 
-        console.log(res.data);
-      })["catch"](function (err) {
-        console.log(err.response);
-      });
+      if (this.expenseName != '') {
+        //Create the list only when the name is not empty
+        axios__WEBPACK_IMPORTED_MODULE_5___default().post('/newExpense', data).then(function (res) {
+          console.log(res);
+
+          _this.expenses.push(res.data);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     },
     startEditingSpaceName: function startEditingSpaceName() {
       this.isEditing = true;
@@ -19804,19 +19827,6 @@ __webpack_require__.r(__webpack_exports__);
     stopDeleting: function stopDeleting() {
       this.isDeleting = false;
     }
-  },
-  data: function data() {
-    return {
-      form: this.$inertia.form({
-        description: '',
-        montant: '',
-        date: ''
-      }),
-      isEditing: false,
-      isDeleting: false,
-      space_name: '',
-      space_budget: ''
-    };
   },
   directives: {
     clickoutside: {
@@ -21583,20 +21593,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     autocomplete: "space_budget"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_16, _hoisted_17]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
-    "for": "description",
-    value: "Description"
+  , ["modelValue"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_16, _hoisted_17]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
+    "for": "expenseName",
+    value: "Expense name"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
-    id: "description",
+    id: "expenseName",
     type: "text",
     "class": "mt-1 block w-full",
-    modelValue: $data.form.description,
+    modelValue: $data.expenseName,
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.form.description = $event;
+      return $data.expenseName = $event;
     }),
     required: "",
     autofocus: "",
-    autocomplete: "description"
+    autocomplete: "expenseName"
   }, null, 8
   /* PROPS */
   , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeLabel, {
@@ -21604,11 +21614,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "Montant"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
     id: "montant",
-    type: "text",
+    type: "number",
     "class": "mt-1 block w-full",
-    modelValue: $data.form.montant,
+    modelValue: $data.montant,
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-      return $data.form.montant = $event;
+      return $data.montant = $event;
     }),
     required: "",
     autofocus: "",
@@ -21620,25 +21630,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     value: "Date"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeInput, {
     id: "date",
-    type: "text",
+    type: "date",
     "class": "mt-1 block w-full",
-    modelValue: $data.form.date,
+    modelValue: $data.date,
     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-      return $data.form.date = $event;
+      return $data.date = $event;
     }),
     required: "",
     autofocus: "",
     autocomplete: "date"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, null, {
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BreezeButton, {
+    onClick: $options.newExpense
+  }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_23];
     }),
     _: 1
     /* STABLE */
 
-  })])]), _hoisted_24, _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.expenses, function (expense) {
+  }, 8
+  /* PROPS */
+  , ["onClick"])])]), _hoisted_24, _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.expenses, function (expense) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Entry, {
       key: expense.id,
       payer: _ctx.Yo,
@@ -23450,7 +23464,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active, .fade-leave-active {\n        transition: opacity 0.5s ease;\n}\n.fade-enter-from, .fade-leave-to {\n        opacity: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active, .fade-leave-active {\r\n        transition: opacity 0.5s ease;\n}\n.fade-enter-from, .fade-leave-to {\r\n        opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23474,7 +23488,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active, .fade-leave-active {\n        transition: opacity 0.5s ease;\n}\n.fade-enter-from, .fade-leave-to {\n        opacity: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.fade-enter-active, .fade-leave-active {\r\n        transition: opacity 0.5s ease;\n}\n.fade-enter-from, .fade-leave-to {\r\n        opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
