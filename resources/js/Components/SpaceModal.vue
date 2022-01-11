@@ -43,7 +43,7 @@
                         Description
                     </p>
                     <!-- Input to modify the description of the space -->
-                    <textarea v-if="isEditing" id="space_description" class="block resize-none w-40 h-12 lg:w-64 lg:h-16 bg-gray-400 border-gray-100 rounded-md focus:border-gray-700" v-model="space_description" required autocomplete="space_description"/>
+                    <textarea v-if="isEditing" id="space_description" class="block resize-none w-40 h-12 lg:w-64 lg:h-16 bg-gray-400 border-gray-100 rounded-md focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" v-model="space_description" required autocomplete="space_description"/>
                 </div>
                 <!-- Important integer data of the space -->
                 <div class="flex flex-row w-full justify-evenly text-sm lg:text-xl m-4">
@@ -115,19 +115,20 @@
                 </div>
                 <!-- Header of the tab -->
                 <div class="w-full grid grid-cols-6 gap-1 text-xs lg:text-base lg:gap-4 text-center">
-                    <div>
+                    <!-- Add 3 dots whenever the text cannot be displayed -->
+                    <div class="overflow-hidden overflow-ellipsis whitespace-nowrap">
                         Payeur
                     </div>
-                    <div>
+                    <div class="overflow-hidden overflow-ellipsis whitespace-nowrap">
                         Description
                     </div>
-                    <div>
+                    <div class="overflow-hidden overflow-ellipsis whitespace-nowrap">
                         À rembourser
                     </div>
-                    <div>
+                    <div class="overflow-hidden overflow-ellipsis whitespace-nowrap">
                         Date
                     </div>
-                    <div>
+                    <div class="overflow-hidden overflow-ellipsis whitespace-nowrap">
                         Remboursé
                     </div>
                 </div>
@@ -177,9 +178,11 @@ export default {
         }
     },
     methods : {
+        // Methods used to close the component
         close() {
             this.$emit('close');
         },
+        // Add a new expense
         newExpense(){
             let data = {
                 space_id: this.space_id,
@@ -187,7 +190,7 @@ export default {
                 montant: this.montant,
                 date: this.date
             }
-            if(this.expenseName != ''){//Create the list only when the name is not empty
+            if(this.expenseName != ''){ //Create the list only when the name is not empty
                 axios.post('/newExpense', data)
                     .then(res => {
                         console.log(res);
@@ -197,19 +200,24 @@ export default {
                 })
             }
         },
+        // Show the input to rename the name of the space
         startEditingSpaceName(){
             this.isEditing=true;
         },
+        // Hide the input to rename the name of the space
         stopEditingSpaceName(){
             this.isEditing=false;
         },
+        // Open the modal used to confirm the deletion
         startDeleting(){
             this.isDeleting=true;
         },
+        // Hide the modal used to confirm the deletion
         stopDeleting(){
             this.isDeleting=false;
         }
     },
+    // Directive used to detect click oustide of the component
     directives : {
         clickoutside : {
             beforeMount(el, binding, vnode) {
@@ -228,6 +236,7 @@ export default {
 }
 </script>
 <style>
+    /* Style used to do a fade animation */
     .fade-enter-active, .fade-leave-active {
         transition: opacity 0.5s ease;
     }

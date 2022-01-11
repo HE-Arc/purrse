@@ -1,3 +1,4 @@
+<!-- Modified component of the header, where the disconnect button is -->
 <template>
     <div>
         <nav>
@@ -8,6 +9,7 @@
                     <div class="w-9 h-9 mt-1 ml-5 lg:w-12 lg:h-12 lg:my-3">
                         <img src="../Icons/purrse.png"  alt="Purrse icône">
                     </div>
+                    <!-- Name of the page -->
                     <div class="ml-5 mt-2 lg:ml-5 lg:mt-2 text-xl font-semibold text-yellow-200">
                         Mainboard
                     </div>

@@ -1,22 +1,22 @@
 <template>
-    <div class="grid grid-cols-6 gap-4 grid-rows-1 text-yellow-200 py-4 border-b-2 border-yellow-200 text-center">
-        <div v-bind:class="{'line-through':isPaid}">
+    <div class="grid grid-cols-6 gap-4 grid-rows-1 text-yellow-200 py-4 border-b-2 border-yellow-200 text-center text-xs lg:text-base">
+        <div class="mt-1.5" v-bind:class="{'line-through':isPaid}">
             {{this.payer}}
         </div>
-        <div v-bind:class="{'line-through':isPaid}">
+        <div class="mt-1.5" v-bind:class="{'line-through':isPaid}">
             {{this.title}}
         </div>
-        <div v-bind:class="{'line-through':isPaid}">
+        <div class="mt-1.5" v-bind:class="{'line-through':isPaid}">
             {{this.price}} CHF
         </div>
-        <div v-bind:class="{'line-through':isPaid}">
+        <div class="mt-1.5" v-bind:class="{'line-through':isPaid}">
             {{this.date}}
         </div>
         <div>
-            <input type="checkbox" v-model="isPaid" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <input type="checkbox" v-model="isPaid" class="mt-3 w-3 h-3 lg:mb-2.5 lg:w-4 lg:h-4 rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
         </div>
         <div class="m-auto">
-            <img src="../Icons/close_space.png" class="w-6 h-6" alt="Delete space">
+            <img src="../Icons/close_space.png" class="w-5 h-5 lg:w-6 lg:h-6" alt="Delete space">
         </div>
     </div>
 </template>
