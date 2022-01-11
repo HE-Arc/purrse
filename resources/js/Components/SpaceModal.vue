@@ -36,11 +36,27 @@
                     <div class="px-7" v-if="isEditing">
                         Budget : <BreezeInput id="space_budger" type="text" class="block w-40" v-model="space_budget" required autofocus autocomplete="space_budget" />
                     </div>
-                    <div class="px-7">
-                        Transactions : 2'000 CHF
+                    <!-- Transactions -->
+                    <div class="flex flex-col justify-between">
+                        <!-- Title -->
+                        <div class="text-center">
+                            Transactions
+                        </div>
+                        <!-- Value -->
+                        <div class="text-center">
+                            {{totalTransactions}} CHF
+                        </div>
                     </div>
-                    <div class="px-7">
-                        À payer : 2'000 CHF
+                    <!-- Left to pay -->
+                    <div class="flex flex-col justify-between">
+                        <!-- Title -->
+                        <div class="text-center">
+                            À payer
+                        </div>
+                        <!-- Value -->
+                        <div class="text-center">
+                            {{totalToPay}} CHF
+                        </div>
                     </div>
                 </div>
                 <div class="flex flex-row my-3">
@@ -121,7 +137,25 @@ export default {
             isEditing : false,
             isDeleting : false,
             space_name : '',
-            space_budget : ''
+            space_budget : '',
+        }
+    },
+    computed: {
+        totalTransactions(){
+            let sum = 0;
+            this.expenses.forEach(expense =>{
+                sum += expense.cost;
+            });
+            return sum;
+        },
+        totalToPay(){
+            let sum = 0;
+            this.expenses.forEach(expense =>{
+                if(!expense.is_paid){
+                    sum += expense.cost;
+                }
+            });
+            return sum;
         }
     },
     methods : {
