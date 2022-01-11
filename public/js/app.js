@@ -19711,6 +19711,7 @@ __webpack_require__.r(__webpack_exports__);
     SpaceModal: _Components_SpaceModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
+    space_id: Number,
     name: String,
     description: String,
     budget: Number,
@@ -21237,10 +21238,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       total: space.total,
       to_pay: space.to_pay,
       name: space.name,
-      expenses: space.expenses
+      expenses: space.expenses,
+      space_id: space.id
     }, null, 8
     /* PROPS */
-    , ["description", "budget", "total", "to_pay", "name", "expenses"]);
+    , ["description", "budget", "total", "to_pay", "name", "expenses", "space_id"]);
   }), 128
   /* KEYED_FRAGMENT */
   )), $data.isAddingNewSpace ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempSpace, {
@@ -21376,7 +21378,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         total: $props.total,
         to_pay: $props.to_pay,
         expenses: $props.expenses,
-        space_id: _ctx.space.id
+        space_id: $props.space_id
       }, null, 8
       /* PROPS */
       , ["onClose", "description", "budget", "total", "to_pay", "expenses", "space_id"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
@@ -22067,7 +22069,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     width: "48"
   }, {
     trigger: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.auth.user.name) + " ", 1
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.auth.user.username) + " ", 1
       /* TEXT */
       ), _hoisted_7])])];
     }),
@@ -22453,10 +22455,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), $data.addingList ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_AddedTempList, {
     key: 0,
+    onNewList: $options.newList,
     onClose: $options.closeNewList
   }, null, 8
   /* PROPS */
-  , ["onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddList, {
+  , ["onNewList", "onClose"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_AddList, {
     onNewList: $options.openNewList
   }, null, 8
   /* PROPS */
@@ -23519,7 +23522,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\r\n        min-height : 60px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header {\n        min-height : 60px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

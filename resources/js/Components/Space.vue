@@ -3,7 +3,7 @@
         {{name}}
     </li>
     <transition name="fade">
-        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay" :expenses="expenses" :space_id="space.id"/>
+        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay" :expenses="expenses" :space_id="space_id"/>
     </transition>
 </template>
 <script>
@@ -14,6 +14,7 @@
             SpaceModal,
         },
         props: {
+            space_id: Number,
             name: String,
             description: String,
             budget: Number,
