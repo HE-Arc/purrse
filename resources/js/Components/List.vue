@@ -3,7 +3,6 @@
         <transition name="fade">
             <ConfirmModal v-if="isDeleting" @yes="this.$emit('deleteList', id)" @close="stopDeleting"/>
         </transition>
-
         <div class="flex flex-row">
             <p v-if="!isEditingListName" class="m-5 text-grey-500 font-semibold font-sans tracking-wide"> {{name}} </p>
             <div v-if="isEditingListName" class="flex flex-row m-3">
