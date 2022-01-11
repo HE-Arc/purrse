@@ -4,8 +4,8 @@
         <LogoutMenu/>
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
             <List @deleteList="deleteList" v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :id="list.id" :name="list.name" :token="list.token"/>
-            <AddedTempList v-if="addingList" @newList="newList" @close="closeNewList"/>
-            <AddList @new-list="openNewList" @click.stop="openNewList"/>
+            <AddedTempList v-if="addingList" @close="closeNewList"/>
+            <AddList @new-list="openNewList"/>
         </div>
     </div>
 </template>
@@ -93,10 +93,6 @@ export default {
     ::-webkit-scrollbar {
     width: 8px;
     height: 16px;
-    }
-
-    /* Track */
-    ::-webkit-scrollbar-track {
     }
 
     /* Handle */

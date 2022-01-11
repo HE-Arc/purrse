@@ -1,10 +1,7 @@
 <template>
-    <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer" v-clickoutside="close">
+    <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer">
         <div class="flex flex-row">
-            <form>
-                <!-- autofocus -->
-                <BreezeInput id="space_name" type="text" class="block w-40" v-model="form.space_name" required autocomplete="space_name" />
-            </form>
+            <BreezeInput id="space_name" type="text" class="block w-40" v-model="space_name" required autofocus/>
             <div class="ml-2 mt-2 w-6 h-6">
                 <img src="../Icons/close.png" alt="Annuler l'ajout d'espace" @click="close">
             </div>
@@ -20,14 +17,12 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({
-                space_name: '',
-            })
+            space_name : ''
         }
     },
     methods : {
         close() {
-            this.$emit('close');
+            this.$emit('customClose');
         }
     },
     directives : {
