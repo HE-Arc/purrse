@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-center flex-col mr-10 bg-gray-300 rounded-lg">
         <transition name="fade">
-            <ConfirmModal v-if="isDeleting" @no="stopDeleting"/>
+            <ConfirmModal v-if="isDeleting" @yes="this.$emit('deleteList', id)" @no="stopDeleting"/>
         </transition>
 
         <div class="flex flex-row">
