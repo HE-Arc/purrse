@@ -1,16 +1,25 @@
+<!-- Main Page component -->
 <template>
+    <!-- Head title -->
     <Head title="Mainboard"/>
+    <!-- Application's content -->
     <div class="bg-gray-700 min-h-screen h-full">
+        <!-- Header of the page -->
         <LogoutMenu/>
+        <!-- Div which contains all the lists -->
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
+            <!-- All the lists => use of v-for -->
             <List @deleteList="deleteList" @updateList="updateList" v-for="list in lists_arr" :key="list.id" :spaces="list.spaces" :id="list.id" :name="list.name" :token="list.token"/>
+            <!-- Temp list used to add a new list -->
             <AddedTempList v-if="addingList" @newList="newList" @close="closeNewList"/>
+            <!-- Button used to add a new list -->
             <AddList @new-list="openNewList" @click.stop="openNewList"/>
         </div>
     </div>
 </template>
 
 <script>
+// Imports
 import LogoutMenu from '@/Layouts/Logout.vue';
 import List from '@/Components/List.vue';
 import AddList from '@/Components/AddList.vue';
@@ -35,9 +44,11 @@ export default {
         'lists_arr' : Array
     },
     methods : {
+        // Show the new list temp component
         openNewList() {
             this.addingList = true;
         },
+        // Hide the new list temp component
         closeNewList() {
             this.addingList = false;
         },
@@ -104,6 +115,7 @@ export default {
 }
 </script>
 <style>
+    /* Style used for the sizing of the of the application */
     .mainBoard {
         box-sizing: border-box;
         height: calc(100vh - 72px);
@@ -111,11 +123,11 @@ export default {
         margin-left: 20px;
     }
 
-
+    /* Styles used to change the scrollbar */
     /* width */
     ::-webkit-scrollbar {
-    width: 8px;
-    height: 16px;
+        width: 8px;
+        height: 16px;
     }
 
     /* Track */
@@ -124,12 +136,12 @@ export default {
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-    background: #a0aec0;
-    border-radius: 80vh;
+        background: #a0aec0;
+        border-radius: 80vh;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-    background: #434C5E;
+        background: #434C5E;
     }
 </style>

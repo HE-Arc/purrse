@@ -16,7 +16,7 @@
                     Purrse
                 </h1>
                 <h3 class='text-4xl font-normal leading-normal mt-10'>
-                    Phrase bateau avec Purrse et chat I guess
+                    Grâce à Purrse, les transactions de vos activités sont organisées soignieusement.
                 </h3>
                 <p class='mt-20 text-2xl'>
                    L'application Purrse vous permet de gérer vos dépenses avec vos amis, collègues, collocataires...
