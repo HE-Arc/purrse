@@ -14,32 +14,34 @@
                     </div>
                 </div>
                 <div class="flex flex-row text-xl m-4">
-                <div class="px-7">
-                    Budget : {{budget}} CHF
+                    <div class="px-7">
+                        Budget : {{budget}} CHF
+                    </div>
+                    <div class="px-7">
+                        Transactions : {{total}} CHF
+                    </div>
+                    <div class="px-7">
+                        À payer : {{to_pay}} CHF
+                    </div>
                 </div>
-                <div class="px-7">
-                    Transactions : {{total}} CHF
-                </div>
-                <div class="px-7">
-                    À payer : {{to_pay}} CHF
-                </div>
-            </div>
-                <div class="mx-5">
-                    <BreezeLabel for="description" value="Description" />
-                    <BreezeInput id="description" type="text" class="mt-1 block w-full" v-model="form.description" required autofocus autocomplete="description" />
-                </div>
-                <div class="mx-5">
-                    <BreezeLabel for="montant" value="Montant" />
-                    <BreezeInput id="montant" type="text" class="mt-1 block w-full" v-model="form.montant" required autofocus autocomplete="montant" />
-                </div>
-                <div class="mx-5">
-                    <BreezeLabel for="date" value="Date" />
-                    <BreezeInput id="date" type="text" class="mt-1 block w-full" v-model="form.date" required autofocus autocomplete="date" />
-                </div>
-                <div class="mx-5 mt-7">
-                    <BreezeButton>
-                        Register
-                    </BreezeButton>
+                <div class="flex flex-row my-3">
+                    <div class="mx-5">
+                        <BreezeLabel for="name" value="Description" />
+                        <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="expenseName" required autofocus autocomplete="description" />
+                    </div>
+                    <div class="mx-5">
+                        <BreezeLabel for="montant" value="Montant" />
+                        <BreezeInput id="montant" type="number" class="mt-1 block w-full" v-model="montant" required autofocus autocomplete="montant" />
+                    </div>
+                    <div class="mx-5">
+                        <BreezeLabel for="date" value="Date" />
+                        <BreezeInput id="date" type="date" class="mt-1 block w-full" v-model="date" required autofocus autocomplete="date" />
+                    </div>
+                    <div class="mx-5 mt-7">
+                        <BreezeButton @click="newExpense">
+                            Register
+                        </BreezeButton>
+                    </div>
                 </div>
                 <div class="m-5 text-xl font-semibold font-sans tracking-wide">
                     Entrées
@@ -52,10 +54,11 @@
     </div>
 </template>
 <script>
-import BreezeInput from '@/Components/Input.vue'
-import BreezeLabel from '@/Components/Label.vue'
-import BreezeButton from '@/Components/Button.vue'
-import Entry from '@/Components/Entry.vue'
+import BreezeInput from '@/Components/Input.vue';
+import BreezeLabel from '@/Components/Label.vue';
+import BreezeButton from '@/Components/Button.vue';
+import Entry from '@/Components/Entry.vue';
+import axios from 'axios';
 
 export default {
     props: {
@@ -72,31 +75,36 @@ export default {
         BreezeButton,
         Entry
     },
+    data() {
+        return {
+            expenseName: '',
+            montant: 0,
+            date: ''
+        }
+    },
     methods : {
         close() {
             this.$emit('close');
         },
-        newList(){
+        newExpense(){
             let data = {
-                name: 'bob',
-                image: 'bob.png'
+                space_id: this.space_id,
+                name: this.expenseName,
+                montant: this.montant,
+                date: this.date
             }
-            axios.post('/api/newList', data)
-                .then(res => {
-                    this.lists_arr.push(res.data);
-                    console.log(res.data);
-                }).catch(err => {
-                console.log(err.response);
-            })
-        }
-    },
-    data() {
-        return {
-            form: this.$inertia.form({
-                description: '',
-                montant: '',
-                date: ''
-            })
+            console.log("ouais");
+            if(this.expenseName != ''){//Create the list only when the name is not empty
+                console.log("ouais2");
+                axios.post('/newExpense', data)
+                    .then(res => {
+                        console.log(res);
+                        this.expenses.push(res.data);
+                    }).catch(err => {
+                    console.log("aa");
+                    console.log(err);
+                })
+            }
         }
     },
     directives : {

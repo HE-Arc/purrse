@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\ExpenseController;
 use Inertia\Inertia;
 
 /*
@@ -34,5 +35,7 @@ Route::get('/accept/{token}', [InvitationController::class, 'accept'])->middlewa
 Route::get('/lists', [ListController::class, 'create'])->middleware(['auth', 'verified']);
 
 Route::post('newList', [ListController::class, 'createNewList']);
+
+Route::post('newExpense', [ExpenseController::class, 'createNewExpense']);
 
 require __DIR__ . '/auth.php';

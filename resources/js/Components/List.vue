@@ -53,9 +53,8 @@
                 </template>
             </BreezeDropdown>
         </div>
-
         <ul class="w-60 max-w-sm h-full overflow-y-auto">
-            <Space v-for="space in spaces" :key="space.id" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :name="space.name" :expenses="space.expenses"/>
+            <Space v-for="space in spaces" :key="space.id" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :name="space.name" :space_id="space.id" :expenses="space.expenses"/>
             <AddedTempSpace v-if="this.addingSpace" @close="closeNewSpace"/>
         </ul>
     </div>
