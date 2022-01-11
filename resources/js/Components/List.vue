@@ -163,6 +163,7 @@
                 if(spaceName != ''){ //Create the space only if there is a name
                     axios.post('/newSpace', data) //Send to the route newSpace the data
                         .then(res => {
+                            res.data["expenses"] = [];
                             this.spaces.push(res.data) //Add the space in the array
                         }).catch(err => {
                             console.log(err);

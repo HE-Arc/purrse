@@ -4,11 +4,11 @@
         <main class='px-10 md:px-20 lg:px-30 xl:px-40'>
             <div class='flex justify-end text-yellow-200'>
                 <Link :href="route('login')" class="text-2xl underline">
-                    Log in
+                    Se connecter
                 </Link>
 
                 <Link :href="route('register')" class="ml-4 text-2xl underline">
-                    Register
+                    S'inscrire
                 </Link>
             </div>
             <div class='h-full mt-36'>

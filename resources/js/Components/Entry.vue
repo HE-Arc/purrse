@@ -1,15 +1,15 @@
 <template>
     <div class="grid grid-cols-6 gap-4 grid-rows-1 text-yellow-200 py-4 border-b-2 border-yellow-200 text-center text-xs lg:text-base">
-        <div class="mt-1.5" v-bind:class="{'line-through':this.expense.is_paid}">
+        <div class="mt-1.5 overflow-hidden overflow-ellipsis whitespace-nowrap" v-bind:class="{'line-through':this.expense.is_paid}">
             {{this.expense.user}}
         </div>
-        <div class="mt-1.5" v-bind:class="{'line-through':this.expense.is_paid}">
+        <div class="mt-1.5 overflow-hidden overflow-ellipsis whitespace-nowrap" v-bind:class="{'line-through':this.expense.is_paid}">
             {{this.expense.name}}
         </div>
-        <div class="mt-1.5" v-bind:class="{'line-through':this.expense.is_paid}">
+        <div class="mt-1.5 overflow-hidden overflow-ellipsis whitespace-nowrap" v-bind:class="{'line-through':this.expense.is_paid}">
             {{this.expense.cost}} CHF
         </div>
-        <div class="mt-1.5" v-bind:class="{'line-through':this.expense.is_paid}">
+        <div class="mt-1.5 overflow-hidden overflow-ellipsis whitespace-nowrap" v-bind:class="{'line-through':this.expense.is_paid}">
             {{this.expense.date}}
         </div>
         <div>
@@ -22,6 +22,7 @@
 </template>
 <script>
 export default {
+    emits: ['deleteExpense'],
     props:{
         expense: Object
     },

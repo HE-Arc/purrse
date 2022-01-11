@@ -62,7 +62,9 @@ export default {
             if(listName != ''){//Create the list only when the name is not empty
                 axios.post('/newList', data)
                     .then(res => {
-                        this.lists_arr.push(res.data);
+                        let list = res.data;
+                        list.spaces = [];
+                        this.lists_arr.push(list);
                     }).catch(err => {
                         console.log(err);
                     })

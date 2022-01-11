@@ -22,15 +22,15 @@
                     </div>
                     <!-- Edit button -->
                     <div class="w-5 h-5 my-6 lg:w-6 lg:h-6 lg:my-7" v-if="!isEditing">
-                        <img src="../Icons/edit_space.png"  alt="Modifier le nom de l'espace" @click.stop="startEditingSpaceName">
+                        <img src="../Icons/edit_space.png"  alt="Modifier les données de l'espace" @click.stop="startEditingSpaceName">
                     </div>
                     <!-- If the user is editing -->
                     <div class="w-5 h-5 my-6 lg:w-6 lg:h-6 lg:my-7" v-if="isEditing">
-                        <img src="../Icons/close_space.png"  alt="Annuler l'ajout de liste" @click.stop="stopEditingSpaceName">
+                        <img src="../Icons/close_space.png"  alt="Annule les modifications de l'espace" @click.stop="stopEditingSpaceName">
                     </div>
                     <!-- Confirm the changes -->
                     <div class="w-5 h-5 my-6 lg:w-6 lg:h-6 lg:my-7" v-if="isEditing">
-                        <img src="../Icons/check_space.png"  alt="Supprimer l'espace" @click.stop="startDeleting">
+                        <img src="../Icons/check_space.png"  alt="Accepte les modifications de l'espace" @click.stop="updateSpace">
                     </div>
                     <!-- Cancel the changes -->
                     <div class="w-5 h-5 my-6 lg:w-6 lg:h-6 lg:my-7">
@@ -55,11 +55,11 @@
                         </div>
                         <!-- Value -->
                         <div class="text-center" v-if="!isEditing">
-                            10'000 CHF
+                            {{budget}} CHF
                         </div>
                         <!-- Input used to modify the data -->
                         <div class="text-center" v-if="isEditing">
-                            <BreezeInput @keyup.enter="updateSpace" id="space_budget" type="number" class="block h-4 w-20 lg:w-28 lg:h-7" v-model="space_budget"/>
+                            <BreezeInput id="space_budget" type="number" class="block h-4 w-20 lg:w-28 lg:h-7" v-model="space_budget"/>
                         </div>
                     </div>
                     <!-- Transactions -->
@@ -134,7 +134,7 @@
                 </div>
                 <!-- Content of the tab -->
                 <div class="w-full h-56 border-t-2 border-yellow-200 overflow-y-scroll">
-                    <Entry v-for="expense in expenses" :key="expense.id" :payer="Yo" :title="expense.name" :price="expense.cost" :date="expense.date" :isPaid="false"/>
+                    <Entry v-for="expense in expenses" :key="expense.id" :expense="expense" @deleteExpense="deleteExpense"/>
                 </div>
             </div>
         </div>
@@ -181,18 +181,22 @@ export default {
     computed: {
         totalTransactions(){
             let sum = 0;
-            this.expenses.forEach(expense =>{
-                sum += expense.cost;
-            });
+            if(this.expenses) {
+                this.expenses.forEach(expense =>{
+                    sum += expense.cost;
+                });
+            }
             return sum;
         },
         totalToPay(){
             let sum = 0;
-            this.expenses.forEach(expense =>{
-                if(!expense.is_paid){
-                    sum += expense.cost;
-                }
-            });
+            if(this.expenses){
+                this.expenses.forEach(expense =>{
+                    if(!expense.is_paid){
+                        sum += expense.cost;
+                    }
+                });
+            }
             return sum;
         }
     },
@@ -212,7 +216,6 @@ export default {
             if(this.expenseName != ''){//Create the expense only when the name is not empty
                 axios.post('/newExpense', data)
                     .then(res => {
-                        console.log(res);
                         this.expenses.push(res.data);
                     }).catch(err => {
                     console.log(err);

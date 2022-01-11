@@ -15,7 +15,7 @@ class UpdateExpenseTable extends Migration
     {
         Schema::table("expenses", function (Blueprint $table) {
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users');
+            //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
