@@ -38,15 +38,16 @@ class SpaceController extends Controller
     {
         $spaceData = $request->all();
 
-        $space = Space::find($spaceData['id'])->update([
+        $space = Space::where('id', $spaceData['space_id']);
+
+        $space->update([
             'name' => $spaceData['name'],
             'description' => $spaceData['description'],
-            'budget' => doubleval($spaceData['budget']),
-
+            'budget' => doubleval($spaceData['budget'])
         ]);
 
         //Return the response of the axios->post
-        return response()->json('updated');
+        return response()->json($space->get()[0]);
     }
 
     /**

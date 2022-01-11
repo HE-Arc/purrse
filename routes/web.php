@@ -58,5 +58,7 @@ Route::post('updateSpace', [SpaceController::class, 'updateSpace']);
 Route::post('deleteSpace', [SpaceController::class, 'deleteSpace']);
 
 Route::post('newExpense', [ExpenseController::class, 'createNewExpense']);
+Route::post('deleteExpense', [ExpenseController::class, 'deleteExpense']);
+Route::post('updateExpense', [ExpenseController::class, 'updateExpense']);
 
 require __DIR__ . '/auth.php';

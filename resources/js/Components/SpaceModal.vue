@@ -3,12 +3,12 @@
         <div class="table-cell align-middle">
             <div class="flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl" v-clickoutside="close">
                 <transition name="fade">
-                    <ConfirmModal v-if="isDeleting" @close="stopDeleting" @click.stop/>
+                    <ConfirmModal v-if="isDeleting" @close="stopDeleting" @click.stop @yes="deleteSpace"/>
                 </transition>
 
                 <div class="flex flex-row justify-around">
                     <p v-if="!isEditing" class="m-5 text-3xl font-semibold font-sans tracking-wide">
-                        {{description}}
+                        {{name}}
                     </p>
                     <div v-if="isEditing" class="flex flex-row m-5">
                         <BreezeInput id="space_name" type="text" class="block w-40" v-model="space_name" required autofocus autocomplete="space_name" />
@@ -25,16 +25,16 @@
                 </div>
                 <div>
                     <p v-if="!isEditing">
-                        Description
+                        {{description}}
                     </p>
-                    <input v-if="isEditing" type="textarea">
+                    <textarea v-if="isEditing" type="textarea" id="space_description" v-model="space_description"/>
                 </div>
                 <div class="flex flex-row text-xl m-4">
                     <div class="px-7" v-if="!isEditing">
-                        Budget : 10'000 CHF
+                        Budget : {{budget}} CHF
                     </div>
                     <div class="px-7" v-if="isEditing">
-                        Budget : <BreezeInput id="space_budger" type="text" class="block w-40" v-model="space_budget" required autofocus autocomplete="space_budget" />
+                        Budget : <BreezeInput @keyup.enter="updateSpace" id="space_budget" type="number" class="block w-40" v-model="space_budget" required autofocus autocomplete="space_budget" />
                     </div>
                     <!-- Transactions -->
                     <div class="flex flex-col justify-between">
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="w-full border-t-2 border-yellow-200 overflow-y-auto">
-                    <Entry v-for="expense in expenses" :key="expense.id" :payer="Yo" :title="expense.name" :price="expense.cost" :date="expense.date" :isPaid="false"/>
+                    <Entry v-for="expense in expenses" :key="expense.id" :expense="expense" @deleteExpense="deleteExpense"/>
                 </div>
             </div>
         </div>
@@ -116,6 +116,7 @@ import axios from 'axios';
 export default {
     props: {
             description: String,
+            name: String,
             budget: Number,
             total: Number,
             to_pay: Number,
@@ -136,8 +137,9 @@ export default {
             date: '',
             isEditing : false,
             isDeleting : false,
-            space_name : '',
-            space_budget : '',
+            space_name : this.name,
+            space_budget : this.budget,
+            space_description : this.description
         }
     },
     computed: {
@@ -169,7 +171,7 @@ export default {
                 montant: this.montant,
                 date: this.date
             }
-            if(this.expenseName != ''){//Create the list only when the name is not empty
+            if(this.expenseName != ''){//Create the expense only when the name is not empty
                 axios.post('/newExpense', data)
                     .then(res => {
                         console.log(res);
@@ -178,6 +180,36 @@ export default {
                     console.log(err);
                 })
             }
+        },
+        deleteExpense(expense_id){
+            let data = { id: expense_id }
+            let idArray = null;
+            axios.post('/deleteExpense', data)
+                .then(res => {
+                    if(res.data){
+                        this.expenses.forEach(expense => {
+                            if(expense.id == expense_id){ //Find the position of the list in the array to delete
+                                idArray = this.expenses.indexOf(expense);
+                            }
+                        });
+                        this.expenses.splice(idArray,1);//Remove the list in array
+                    }
+                }).catch(err => {
+                console.log(err);
+            })
+        },
+        updateSpace(){
+            let data = {
+                space_id: this.space_id,
+                name: this.space_name,
+                description: this.space_description,
+                budget: this.space_budget
+            }
+            this.isEditing = false;
+            this.$emit('updateSpace', data);
+        },
+        deleteSpace(){
+            this.$emit('deleteSpace');
         },
         startEditingSpaceName(){
             this.isEditing=true;

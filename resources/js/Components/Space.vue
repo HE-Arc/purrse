@@ -1,9 +1,9 @@
 <template>
     <li class="p-4 m-3 flex justify-between items-center bg-yellow-200 shadow rounded-lg cursor-pointer" @click.stop="openModal">
-        {{name}}
+        {{space.name}}
     </li>
     <transition name="fade">
-        <SpaceModal v-if="showModal" @close="closeModal" :description="description" :budget="budget" :total="total" :to_pay="to_pay" :expenses="expenses" :space_id="space_id"/>
+        <SpaceModal v-if="showModal" @close="closeModal" @updateSpace="updateSpace" @deleteSpace="deleteSpace" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :expenses="space.expenses" :space_id="space.id" :name="space.name"/>
     </transition>
 </template>
 <script>
@@ -14,14 +14,7 @@
             SpaceModal,
         },
         props: {
-            space_id: Number,
-            name: String,
-            description: String,
-            budget: Number,
-            total: Number,
-            to_pay: Number,
-            space_id: Number,
-            expenses: Array
+            space: Object
         },
         data() {
             return {
@@ -34,6 +27,20 @@
             },
             closeModal() {
                 this.showModal = false;
+            },
+            updateSpace(data){
+                axios.post('/updateSpace', data)
+                    .then(res => {
+                        let space = res.data;
+                        this.space.name = space['name'];
+                        this.space.description = space['description'];
+                        this.space.budget = space['budget'];
+                    }).catch(err => {
+                    console.log(err);
+                })
+            },
+            deleteSpace(){
+                this.$emit('deleteSpaceInList', this.space.id);
             }
         }
     }
