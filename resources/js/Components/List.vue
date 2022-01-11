@@ -64,7 +64,7 @@
             </BreezeDropdown>
         </div>
         <ul class="w-60 max-w-sm h-full overflow-y-auto">
-            <Space v-for="space in spaces" :key="space.id" :description="space.description" :budget="space.budget" :total="space.total" :to_pay="space.to_pay" :name="space.name" :expenses="space.expenses" :space_id="space.id"/>
+            <Space v-for="space in spaces" :key="space.id" :space="space" @deleteSpaceInList="deleteSpaceInList"/>
             <AddedTempSpace v-if="isAddingNewSpace" @customClose="stopAddingSpace"/>
         </ul>
     </div>
@@ -122,6 +122,23 @@
             },
             stopDeleting() {
                 this.isDeleting = false;
+            },
+            deleteSpaceInList(space_id){
+                let data = { id: space_id }
+                let idArray = null;
+                axios.post('/deleteSpace', data)
+                    .then(res => {
+                        if(res.data){
+                            this.spaces.forEach(space => {
+                                if(space.id == space_id){ //Find the position of the list in the array to delete
+                                    idArray = this.spaces.indexOf(space);
+                                }
+                            });
+                            this.spaces.splice(idArray,1);//Remove the list in array
+                        }
+                    }).catch(err => {
+                    console.log(err);
+                })
             }
         }
     }

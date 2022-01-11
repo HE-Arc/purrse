@@ -8,6 +8,8 @@ use Inertia\Inertia;
 use App\Models\Lists;
 use App\Models\Space;
 use App\Models\UserToList;
+use App\Models\ExpenseToUser;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\Expense;
@@ -29,6 +31,7 @@ class ListController extends Controller
                 $expenses = Expense::where('space_id', $spaces[$j]['id'])->get()->toArray();
                 $spaces[$j]['expenses'] = [];
                 foreach ($expenses as $expense){
+                    $expense['user'] = User::where('id', $expense['user_id'])->get('username')[0]['username'];
                     array_push($spaces[$j]['expenses'],$expense);
                 }
             }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Expense;
 use App\Models\ExpenseToUser;
+use App\Models\User;
 
 class ExpenseController extends Controller
 {
@@ -26,15 +27,46 @@ class ExpenseController extends Controller
             'cost' => doubleval($expenseData['montant']),
             'date' => $expenseData['date'],
             'is_paid' => 0,
-        ]);
+            'user_id' => Auth::id()
+        ])->toArray();
 
-        /*
-        $userToExpense = ExpenseToUser::create([
-            'user_id' => Auth::id(),
-            'expense_id' => $newExpense->id,
-        ]);*/
-
+        $userName = User::where('id', Auth::id())->get('username')[0];
+        $newExpense['user'] = $userName['username'];
         //Return the responde of the axios->post
         return response()->json($newExpense);
+    }
+
+    /**
+     * route : /updateExpense
+     * Update the space with data in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function updateExpense(Request $request)
+    {
+        $expenseData = $request->all();
+
+        $expense = Expense::where('id', $expenseData['id']);
+
+        $expense->update([
+            'is_paid' => $expenseData['paid']
+        ]);
+
+        //Return the response of the axios->post
+        return response()->json("updated");
+    }
+
+    /**
+     * route : /deleteExpense
+     * Delete the expense with is id in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteExpense(Request $request)
+    {
+        $expenseId = $request->all();
+
+        $expense = Expense::find($expenseId['id']);
+        $expense->delete();
+
+        return response()->json('deleted');
     }
 }

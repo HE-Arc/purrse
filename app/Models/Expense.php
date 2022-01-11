@@ -11,6 +11,7 @@ class Expense extends Model
         'cost',
         'date',
         'is_paid',
+        'user_id'
     ];
 }
 
