@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Lists extends Model
@@ -9,5 +11,6 @@ class Lists extends Model
         'name',
         'image',
         'token',
+        'owner_id'
     ];
 }

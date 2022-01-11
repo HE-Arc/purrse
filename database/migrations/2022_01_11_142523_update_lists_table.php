@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateList extends Migration
+class UpdateListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateList extends Migration
      */
     public function up()
     {
-        Schema::table("lists", function(Blueprint $table){
-            $table->string("token");
+        Schema::table("lists", function (Blueprint $table) {
+            $table->bigInteger('owner_id')->unsigned()->index();
         });
     }
 
@@ -26,7 +26,7 @@ class UpdateList extends Migration
     public function down()
     {
         Schema::table("lists", function ($table) {
-            $table->dropColumn("token");
+            $table->dropColumn("owner_id");
         });
     }
 }
