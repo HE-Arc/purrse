@@ -87,7 +87,7 @@ export default {
             window.location.href='/accept/' + this.listToken;
         },
         goBack(){
-            window.location.href='/';
+            window.location.href='/mainboard';
         }
     }
 }

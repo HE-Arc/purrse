@@ -57,8 +57,6 @@ class InvitationController extends Controller
                 'list_id' => $arrayListId[0]->id,
             ]);
         }
-        return Inertia::render('Application/Home'); //Go to the home page
+        return Inertia::render('Application/Mainboard'); //Go to the home page
     }
 }
-
-?>
