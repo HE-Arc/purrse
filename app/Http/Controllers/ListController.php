@@ -50,6 +50,7 @@ class ListController extends Controller
      * route : /newList
      * Create a new list and generate a token for the list.
      * Create a entry in the table user_to_list, to link the user to the new list
+     * @return \Illuminate\Http\Response
      */
     public function createNewList(Request $request)
     {
@@ -69,7 +70,40 @@ class ListController extends Controller
             'list_id' => $newList->id,
         ]);
 
-        //Return the responde of the axios->post
+        //Return the response of the axios->post
         return response()->json($newList);
+    }
+
+    /**
+     * route : /updateList
+     * Update the list with data in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function updateList(Request $request)
+    {
+        $listData = $request->all();
+
+        $list = Lists::find($listData['id'])->update([
+            'name' => $listData['name'],
+            'image' => $listData['image']
+        ]);
+
+        //Return the response of the axios->post
+        return response()->json('updated');
+    }
+
+    /**
+     * route : /deleteList
+     * Delete the list with is id in arguments
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteList(Request $request)
+    {
+        $listId = $request->all();
+
+        $list = Lists::find($listId['id']);
+        $list->delete();
+
+        return response()->json('deleted');
     }
 }
