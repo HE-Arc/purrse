@@ -87,12 +87,15 @@ export default {
             let idArray = null;
             axios.post('/deleteList', data) //Remove the list in the database
                 .then(res =>{
-                    this.lists_arr.forEach(list => {
-                        if(list.id == listId){ //Find the position of the list in the array to delete
-                            idArray = this.lists_arr.indexOf(list);
-                        }
-                    });
-                    this.lists_arr.splice(idArray,1);//Remove the list in array
+                    console.log(res.data);
+                    if(res.data == 1){
+                        this.lists_arr.forEach(list => {
+                            if(list.id == listId){ //Find the position of the list in the array to delete
+                                idArray = this.lists_arr.indexOf(list);
+                            }
+                        });
+                        this.lists_arr.splice(idArray,1);//Remove the list in array
+                    }
                 }).catch(err => {
                     console.log(err);
                 });

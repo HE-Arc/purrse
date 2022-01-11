@@ -102,11 +102,10 @@ class ListController extends Controller
      */
     public function deleteList(Request $request)
     {
-        $listId = $request->all();
+        $listData = $request->all();
 
-        $list = Lists::find($listId['id']);
-        $list->delete();
+        $list = Lists::where('id', $listData['id'])->where('owner_id', Auth::id());
 
-        return response()->json('deleted');
+        return response()->json($list->delete());
     }
 }
