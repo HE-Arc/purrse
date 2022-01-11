@@ -21,26 +21,24 @@ class ListController extends Controller
      */
     public function create(Request $request)
     {
-        $lists = Lists::all()->toArray();
-        $spaces = Space::all()->toArray();
-        $expenses = Expense::all()->toArray();
-        for ($i = 0; $i < count($spaces); $i++) {
-            $spaces[$i]['expenses'] = [];
-            for ($j = 0; $j < count($expenses); $j++) {
-                if ($spaces[$i]['id'] == $expenses[$j]['space_id']) {
-                    array_push($spaces[$i]['expenses'], $expenses[$j]);
+        $list_id = UserToList::where('user_id', Auth::id())->get('list_id');
+        $lists = Lists::whereIn('id', $list_id)->get()->toArray();
+        for($i = 0; $i < count($lists); $i++){
+            $spaces = Space::where('list_id', $lists[$i]['id'])->get()->toArray();
+            for($j = 0; $j < count($spaces); $j++){
+                $expenses = Expense::where('space_id', $spaces[$j]['id'])->get()->toArray();
+                $spaces[$j]['expenses'] = [];
+                foreach ($expenses as $expense){
+                    array_push($spaces[$j]['expenses'],$expense);
                 }
             }
-        }
-        for ($i = 0; $i < count($lists); $i++) {
             $lists[$i]['spaces'] = [];
-            for ($j = 0; $j < count($spaces); $j++) {
-                if ($lists[$i]['id'] == $spaces[$j]['list_id']) {
-                    array_push($lists[$i]['spaces'], $spaces[$j]);
-                }
+            foreach ($spaces as $space){
+                array_push($lists[$i]['spaces'],$space);
             }
         }
         //print_r($lists);
+
         return Inertia::render('Application/Mainboard', [
             'lists_arr' => $lists
         ]);

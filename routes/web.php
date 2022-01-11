@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Invitation\InvitationController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\SpaceController;
+use App\Http\Controllers\ExpenseController;
 use Inertia\Inertia;
 
 /*
@@ -55,5 +56,7 @@ Route::post('deleteList', [ListController::class, 'deleteList']);
 Route::post('newSpace', [SpaceController::class, 'createNewSpace']);
 Route::post('updateSpace', [SpaceController::class, 'updateSpace']);
 Route::post('deleteSpace', [SpaceController::class, 'deleteSpace']);
+
+Route::post('newExpense', [ExpenseController::class, 'createNewExpense']);
 
 require __DIR__ . '/auth.php';

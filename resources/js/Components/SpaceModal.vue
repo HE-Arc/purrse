@@ -95,6 +95,7 @@ import BreezeLabel from '@/Components/Label.vue';
 import BreezeButton from '@/Components/Button.vue';
 import Entry from '@/Components/Entry.vue';
 import ConfirmModal from '@/Components/ConfirmModal.vue';
+import axios from 'axios';
 
 export default {
     props: {
@@ -112,14 +113,35 @@ export default {
         Entry,
         ConfirmModal
     },
+    data() {
+        return {
+            expenseName: '',
+            montant: 0,
+            date: ''
+        }
+    },
     methods : {
         close() {
             this.$emit('close');
         },
-        newList(){
+        newExpense(){
             let data = {
-                name: 'bob',
-                image: 'bob.png'
+                space_id: this.space_id,
+                name: this.expenseName,
+                montant: this.montant,
+                date: this.date
+            }
+            console.log("ouais");
+            if(this.expenseName != ''){//Create the list only when the name is not empty
+                console.log("ouais2");
+                axios.post('/newExpense', data)
+                    .then(res => {
+                        console.log(res);
+                        this.expenses.push(res.data);
+                    }).catch(err => {
+                    console.log("aa");
+                    console.log(err);
+                })
             }
             axios.post('/api/newList', data)
                 .then(res => {

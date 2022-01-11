@@ -20,6 +20,7 @@
             budget: Number,
             total: Number,
             to_pay: Number,
+            space_id: Number,
             expenses: Array
         },
         data() {
