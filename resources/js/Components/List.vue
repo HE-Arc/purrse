@@ -1,24 +1,28 @@
 <template>
     <div class="flex items-center justify-center flex-col mr-10 bg-gray-300 rounded-lg">
-        <ConfirmModal v-if="isDeleting" @no="stopDeleting"/>
+        <transition name="fade">
+            <ConfirmModal v-if="isDeleting" @no="stopDeleting"/>
+        </transition>
+
+
 
         <div class="flex flex-row">
             <p v-if="!isEditingListName" class="m-5 text-grey-500 font-semibold font-sans tracking-wide"> {{name}} </p>
-            <div v-if="isEditingListName" class="flex flex-row m-5">
-                <BreezeInput id="list_name" type="text" class="block w-40" v-model="list_name" required autofocus autocomplete="list_name" />
+            <div v-if="isEditingListName" class="flex flex-row m-3">
+                <BreezeInput id="list_name" type="text" class="block w-32" v-model="list_name" required autocomplete="list_name" />
                 <div class="ml-3 mt-2 w-6 h-6">
                     <img src="../Icons/close.png"  alt="Annuler l'ajout de liste" @click="stopEditingListName">
                 </div>
             </div>
             <BreezeDropdown>
                 <template #trigger>
-                    <div class="w-8 h-8 mt-4 ml-5">
+                    <div class="w-8 h-8 mt-4 mr-3">
                         <img src="../Icons/dots.png"  alt="Plus ...">
                     </div>
                 </template>
 
                 <template #content>
-                    <BreezeDropdownLink @click="startAddingSpace">
+                    <ListDropdownAction @click="startAddingSpace">
                         <div class="flex flex-row">
                             <div class="w-6 h-6 mr-1">
                                 <img src="../Icons/add.png"  alt="Ajouter un espace">
@@ -27,8 +31,8 @@
                                 Ajouter un espace
                             </div>
                         </div>
-                    </BreezeDropdownLink>
-                    <BreezeDropdownLink @click="share">
+                    </ListDropdownAction>
+                    <ListDropdownAction @click="share">
                         <div class="flex flex-row">
                             <div class="w-6 h-6 mr-1">
                                 <img src="../Icons/share.png"  alt="Partager une liste">
@@ -37,8 +41,8 @@
                                 Partager la liste
                             </div>
                         </div>
-                    </BreezeDropdownLink>
-                    <BreezeDropdownLink @click="startEditingListName">
+                    </ListDropdownAction>
+                    <ListDropdownAction @click="startEditingListName">
                         <div class="flex flex-row">
                             <div class="w-6 h-6 mr-1">
                                 <img src="../Icons/edit.png"  alt="Renommer la liste">
@@ -47,8 +51,8 @@
                                 Renommer la liste
                             </div>
                         </div>
-                    </BreezeDropdownLink>
-                    <BreezeDropdownLink @click.stop="startDeleting">
+                    </ListDropdownAction>
+                    <ListDropdownAction @click.stop="startDeleting">
                         <div class="flex flex-row">
                             <div class="w-6 h-6 mr-1">
                                 <img src="../Icons/delete.png"  alt="Effacer la liste">
@@ -57,14 +61,14 @@
                                 Supprimer la liste
                             </div>
                         </div>
-                    </BreezeDropdownLink>
+                    </ListDropdownAction>
                 </template>
             </BreezeDropdown>
         </div>
 
         <ul class="w-60 max-w-sm h-full overflow-y-auto">
             <Space v-for="user in users" :key="user.id" :user="user"/>
-            <AddedTempSpace v-if="isAddingNewSpace" @close="stopAddingSpace"/>
+            <AddedTempSpace v-if="isAddingNewSpace" @customClose="stopAddingSpace"/>
         </ul>
     </div>
 </template>
@@ -72,8 +76,8 @@
     import Space from '@/Components/Space.vue';
     import ConfirmModal from '@/Components/ConfirmModal.vue';
     import AddedTempSpace from '@/Components/AddedTempSpace.vue';
+    import ListDropdownAction from '@/Components/ListDropdownAction.vue';
     import BreezeDropdown from '@/Components/Dropdown.vue';
-    import BreezeDropdownLink from '@/Components/DropdownLink.vue';
     import BreezeInput from '@/Components/Input.vue';
 
     export default {
@@ -82,7 +86,7 @@
             ConfirmModal,
             AddedTempSpace,
             BreezeDropdown,
-            BreezeDropdownLink,
+            ListDropdownAction,
             BreezeInput,
         },
         props: {
@@ -95,7 +99,7 @@
                 isEditingListName : false,
                 isDeleting : false,
                 list_name : '',
-            };
+            }
         },
         methods:{
             share() {
@@ -126,3 +130,12 @@
         }
     }
 </script>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+    }
+</style>

@@ -19,9 +19,7 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({
-                list_name: '',
-            })
+            list_name: '',
         }
     },
     methods : {

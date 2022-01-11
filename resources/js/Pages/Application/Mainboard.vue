@@ -4,8 +4,8 @@
         <LogoutMenu/>
 
         <div id="lists" class="flex justify-start pl-32 overflow-x-auto mainBoard">
-            <List :users=users :name="'Collocation'" />
-            <List :users=users2 :name="'Appartement'" />
+            <List :users="users" :name="'Collocation'" />
+            <List :users="users2" :name="'Appartement'" />
             <AddedTempList v-if="addingList" @close="closeNewList"/>
             <AddList @new-list="openNewList"/>
         </div>
@@ -31,10 +31,10 @@ export default {
         return {
             addingList : false,
             users: [
-            {
-                id: 1,
-                name: "Adrian Schubert"
-            },
+                {
+                    id: 1,
+                    name: "Adrian Schubert"
+                },
             ],
             users2: [
                 {
@@ -43,11 +43,11 @@ export default {
                 },
                 {
                     id: 2,
-                    name: "Suce"
+                    name: "Test1"
                 },
                 {
                     id: 3,
-                    name: "Ma Grosse"
+                    name: "Test2"
                 },
             ]
         }

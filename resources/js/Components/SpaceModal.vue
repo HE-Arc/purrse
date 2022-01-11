@@ -2,28 +2,39 @@
     <div class="fixed table top-0 left-0 z-50 w-full h-full bg-black bg-opacity-50">
         <div class="table-cell align-middle">
             <div class="flex items-center flex-col w-2/4 h-3/5 my-0 mx-auto py-5 px-5 bg-gray-700 text-yellow-200 rounded-md shadow-2xl" v-clickoutside="close">
-                <ConfirmModal v-if="isDeleting" @close="stopDeleting" @click.stop/>
+                <transition name="fade">
+                    <ConfirmModal v-if="isDeleting" @close="stopDeleting" @click.stop/>
+                </transition>
 
                 <div class="flex flex-row justify-around">
-                    <p v-if="!isEditingSpaceName" class="m-5 text-3xl font-semibold font-sans tracking-wide">
+                    <p v-if="!isEditing" class="m-5 text-3xl font-semibold font-sans tracking-wide">
                         {{this.user.name}}
                     </p>
-                    <div v-if="isEditingSpaceName" class="flex flex-row m-5">
+                    <div v-if="isEditing" class="flex flex-row m-5">
                         <BreezeInput id="space_name" type="text" class="block w-40" v-model="space_name" required autofocus autocomplete="space_name" />
-                        <div class="ml-3 mt-2 w-6 h-6">
+                    </div>
+                    <div class="w-6 h-6 my-6" v-if="!isEditing">
+                        <img src="../Icons/edit_space.png"  alt="Modifier le nom de l'espace" @click.stop="startEditingSpaceName">
+                    </div>
+                    <div class="w-6 h-6 my-6" v-if="isEditing">
                             <img src="../Icons/close_space.png"  alt="Annuler l'ajout de liste" @click.stop="stopEditingSpaceName">
                         </div>
-                    </div>
-                    <div class="w-6 h-6 my-6">
-                        <img src="../Icons/edit_space.png"  alt="Modifier le nom de l'espace" @click="startEditingSpaceName">
-                    </div>
                     <div class="w-6 h-6 my-6">
                         <img src="../Icons/delete_space.png"  alt="Supprimer l'espace" @click.stop="startDeleting">
                     </div>
                 </div>
+                <div>
+                    <p v-if="!isEditing">
+                        Description
+                    </p>
+                    <input v-if="isEditing" type="textarea">
+                </div>
                 <div class="flex flex-row text-xl m-4">
-                    <div class="px-7">
+                    <div class="px-7" v-if="!isEditing">
                         Budget : 10'000 CHF
+                    </div>
+                    <div class="px-7" v-if="isEditing">
+                        Budget : <BreezeInput id="space_budger" type="text" class="block w-40" v-model="space_budget" required autofocus autocomplete="space_budget" />
                     </div>
                     <div class="px-7">
                         Transactions : 2'000 CHF
@@ -47,12 +58,29 @@
                     </div>
                     <div class="mx-5 mt-7">
                         <BreezeButton>
-                            Register
+                            Entrer
                         </BreezeButton>
                     </div>
                 </form>
                 <div class="m-5 text-xl font-semibold font-sans tracking-wide">
                     Entrées
+                </div>
+                <div class="flex flex-row w-full justify-between">
+                    <div>
+                        Payeur
+                    </div>
+                    <div>
+                        Description
+                    </div>
+                    <div>
+                        À rembourser
+                    </div>
+                    <div>
+                        Date
+                    </div>
+                    <div>
+                        Remboursé
+                    </div>
                 </div>
                 <div class="w-full border-t-2 border-yellow-200 overflow-y-auto">
                     <Entry/>
@@ -87,10 +115,10 @@ export default {
             this.$emit('close');
         },
         startEditingSpaceName(){
-            this.isEditingSpaceName=true;
+            this.isEditing=true;
         },
         stopEditingSpaceName(){
-            this.isEditingSpaceName=false;
+            this.isEditing=false;
         },
         startDeleting(){
             this.isDeleting=true;
@@ -107,9 +135,10 @@ export default {
                 montant: '',
                 date: ''
             }),
-            isEditingSpaceName : false,
+            isEditing : false,
             isDeleting : false,
-            space_name : ''
+            space_name : '',
+            space_budget : ''
         }
     },
     directives : {
@@ -129,3 +158,12 @@ export default {
     }
 }
 </script>
+<style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s ease;
+    }
+
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
+    }
+</style>
