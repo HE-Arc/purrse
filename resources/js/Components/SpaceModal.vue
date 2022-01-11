@@ -43,25 +43,25 @@
                         À payer : 2'000 CHF
                     </div>
                 </div>
-                <form class="flex flex-row my-3">
+                <div class="flex flex-row my-3">
                     <div class="mx-5">
-                        <BreezeLabel for="description" value="Description" />
-                        <BreezeInput id="description" type="text" class="mt-1 block w-full" v-model="form.description" required autofocus autocomplete="description" />
+                        <BreezeLabel for="expenseName" value="Expense name" />
+                        <BreezeInput id="expenseName" type="text" class="mt-1 block w-full" v-model="expenseName" required autofocus autocomplete="expenseName" />
                     </div>
                     <div class="mx-5">
                         <BreezeLabel for="montant" value="Montant" />
-                        <BreezeInput id="montant" type="text" class="mt-1 block w-full" v-model="form.montant" required autofocus autocomplete="montant" />
+                        <BreezeInput id="montant" type="number" class="mt-1 block w-full" v-model="montant" required autofocus autocomplete="montant" />
                     </div>
                     <div class="mx-5">
                         <BreezeLabel for="date" value="Date" />
-                        <BreezeInput id="date" type="text" class="mt-1 block w-full" v-model="form.date" required autofocus autocomplete="date" />
+                        <BreezeInput id="date" type="date" class="mt-1 block w-full" v-model="date" required autofocus autocomplete="date" />
                     </div>
                     <div class="mx-5 mt-7">
-                        <BreezeButton>
+                        <BreezeButton @click="newExpense">
                             Entrer
                         </BreezeButton>
                     </div>
-                </form>
+                </div>
                 <div class="m-5 text-xl font-semibold font-sans tracking-wide">
                     Entrées
                 </div>
