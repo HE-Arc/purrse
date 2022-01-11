@@ -15,6 +15,7 @@ Un tutoriel présent sur le projet "workshop-laravel", explique comment récupé
 -   [php](https://www.php.net/) - v7.3
 -   [laravel](https://laravel.com/) - v8.65
 -   [laravel-breeze](https://laravel.com/docs/8.x/starter-kits) - v1.4
+-   [doctrine/dbal](https://github.com/doctrine/dbal) - v2.0
 
 ### Frontend
 
