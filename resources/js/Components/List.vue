@@ -7,7 +7,7 @@
         <div class="flex flex-row">
             <p v-if="!isEditingListName" class="m-5 text-grey-500 font-semibold font-sans tracking-wide"> {{name}} </p>
             <div v-if="isEditingListName" class="flex flex-row m-3">
-                <BreezeInput id="list_name" type="text" class="block w-32" v-model="list_name" required autocomplete="list_name" />
+                <BreezeInput id="list_name" @keyup.enter="updateList" type="text" class="block w-32" v-model="list_name" required autocomplete="list_name" />
                 <div class="ml-3 mt-2 w-6 h-6">
                     <img src="../Icons/close.png"  alt="Annuler l'ajout de liste" @click="stopEditingListName">
                 </div>
@@ -122,6 +122,10 @@
             },
             stopDeleting() {
                 this.isDeleting = false;
+            },
+            updateList(){
+                this.stopEditingListName();
+                this.$emit('updateList', [this.id,this.list_name]);
             }
         }
     }
